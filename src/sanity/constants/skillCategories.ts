@@ -139,6 +139,7 @@ export const SKILL_CATEGORIES: CategoryDef[] = [
       "aws",
       "gcp",
       "azure",
+      "inngest",
       "docker",
       "kubernetes",
       "github_actions",

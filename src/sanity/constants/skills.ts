@@ -56,6 +56,7 @@ export const SKILLS_LIST = [
   { title: "Hono", value: "hono" },
   { title: "HTML", value: "html" },
   { title: "Hugging Face", value: "hugging_face" },
+  { title: "Inngest", value: "inngest" },
   { title: "Java", value: "java" },
   { title: "JavaScript", value: "javascript" },
   { title: "Jest", value: "jest" },

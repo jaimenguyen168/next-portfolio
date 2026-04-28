@@ -198,6 +198,7 @@ export const SKILL_META: Record<string, SkillMeta> = {
   azure:              { icon: FaWindows,          label: "Azure",            color: "#0078d4" },
 
   // ─── Auth & Tools — DevOps ───────────────────────────────────────────────────
+  inngest:            { icon: FaBolt,             label: "Inngest",          color: "#e9d4ff" },
   docker:             { icon: SiDocker,           label: "Docker",           color: "#2496ed" },
   kubernetes:         { icon: SiKubernetes,       label: "Kubernetes",       color: "#326ce5" },
   github_actions:     { icon: SiGithubactions,    label: "GitHub Actions",   color: "#2088ff" },
