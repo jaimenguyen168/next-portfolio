@@ -1,63 +1,25 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  SiNextdotjs, SiReact, SiTypescript, SiJavascript, SiTailwindcss, SiVite,
-  SiExpo, SiSwift,
-  SiNodedotjs, SiPrisma, SiMongodb, SiSupabase, SiFirebase, SiPostgresql,
-  SiClerk, SiGit, SiGithub, SiVercel, SiStripe, SiOpenai, SiAnthropic,
-} from "react-icons/si";
+import { SKILL_META } from "@/sanity/constants/skillMeta";
+import { SKILL_CATEGORIES } from "@/sanity/constants/skillCategories";
 
-const skillCategories = [
-  {
-    title: "Frontend & Web",
-    accentClass: "bg-accent-light",
-    skills: [
-      { icon: SiNextdotjs, label: "Next.js", color: "#ffffff" },
-      { icon: SiReact,     label: "React",      color: "#61dafb" },
-      { icon: SiTypescript,label: "TypeScript",  color: "#3178c6" },
-      { icon: SiJavascript,label: "JavaScript",  color: "#f7df1e" },
-      { icon: SiTailwindcss,label: "Tailwind",   color: "#38bdf8" },
-      { icon: SiVite,       label: "Vite",       color: "#646cff" },
-    ],
-  },
-  {
-    title: "Mobile",
-    accentClass: "bg-amber-400",
-    skills: [
-      { icon: SiReact, label: "React Native", color: "#61dafb" },
-      { icon: SiExpo,  label: "Expo",         color: "#f59e0b" },
-      { icon: SiSwift, label: "SwiftUI",       color: "#f05138" },
-    ],
-  },
-  {
-    title: "Backend & Database",
-    accentClass: "bg-emerald-400",
-    skills: [
-      { icon: SiNodedotjs,  label: "Node.js",    color: "#68a063" },
-      { icon: SiPrisma,     label: "Prisma",      color: "#ffffff" },
-      { icon: SiMongodb,    label: "MongoDB",     color: "#4db33d" },
-      { icon: SiSupabase,   label: "Supabase",    color: "#3ecf8e" },
-      { icon: SiFirebase,   label: "Firebase",    color: "#ffca28" },
-      { icon: SiPostgresql, label: "PostgreSQL",  color: "#336791" },
-    ],
-  },
-  {
-    title: "Auth & Tools",
-    accentClass: "bg-rose-400",
-    skills: [
-      { icon: SiClerk,   label: "Clerk",   color: "#6c47ff" },
-      { icon: SiGit,     label: "Git",     color: "#f05032" },
-      { icon: SiGithub,  label: "GitHub",  color: "#ffffff" },
-      { icon: SiVercel,  label: "Vercel",  color: "#ffffff" },
-      { icon: SiStripe,    label: "Stripe",    color: "#635bff" },
-      { icon: SiOpenai,    label: "OpenAI",    color: "#ffffff" },
-      { icon: SiAnthropic, label: "Anthropic", color: "#d97757" },
-    ],
-  },
-];
+type Props = {
+  activeSkills: string[];
+};
 
-export default function SkillsSection() {
+export default function SkillsSection({ activeSkills }: Props) {
+  const activeSet = new Set(activeSkills);
+
+  const categories = SKILL_CATEGORIES.map((cat) => ({
+    title: cat.title,
+    accentClass: cat.accentClass,
+    skills: cat.skills
+      .filter((value) => activeSet.has(value))
+      .map((value) => SKILL_META[value])
+      .filter(Boolean),
+  })).filter((cat) => cat.skills.length > 0);
+
   return (
     <section id="skills" className="section-full px-4 md:px-16 py-6 md:py-24">
       <div className="max-w-5xl mx-auto w-full">
@@ -78,7 +40,7 @@ export default function SkillsSection() {
 
         {/* Cards zoom out */}
         <div className="grid grid-cols-2 md:grid-cols-2 gap-3 md:gap-6">
-          {skillCategories.map((cat, i) => (
+          {categories.map((cat, i) => (
             <motion.div
               key={cat.title}
               className="card p-3 md:p-7"
