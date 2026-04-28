@@ -38,12 +38,12 @@ export default function SkillsSection({ activeSkills }: Props) {
           </p>
         </motion.div>
 
-        {/* Cards zoom out */}
+        {/* Cards */}
         <div className="grid grid-cols-2 md:grid-cols-2 gap-3 md:gap-6">
           {categories.map((cat, i) => (
             <motion.div
               key={cat.title}
-              className="card p-3 md:p-7"
+              className="card p-3 md:p-7 cursor-default transition-colors duration-300 hover:bg-white/[0.07] hover:border-white/20"
               initial={{ opacity: 0, scale: 1.15 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: false }}
@@ -53,16 +53,23 @@ export default function SkillsSection({ activeSkills }: Props) {
                 <div className={`h-0.5 w-6 md:w-8 rounded-full ${cat.accentClass}`} />
                 <h3 className="font-semibold text-white text-sm md:text-lg">{cat.title}</h3>
               </div>
+
               <div className="flex flex-wrap gap-2 md:gap-3">
                 {cat.skills.map(({ icon: Icon, label, color }) => (
-                  <div
+                  <motion.div
                     key={label}
-                    className="flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-md px-2 py-1 md:px-3 md:py-1.5"
+                    className="flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-md px-2 py-1 md:px-3 md:py-1.5 cursor-default"
+                    whileHover={{
+                      scale: 1.08,
+                      backgroundColor: "rgba(255,255,255,0.1)",
+                      borderColor: "rgba(255,255,255,0.25)",
+                    }}
+                    transition={{ duration: 0.15, ease: "easeOut" }}
                   >
                     <Icon size={14} color={color} className="md:hidden" />
                     <Icon size={16} color={color} className="hidden md:block" />
                     <span className="text-xs text-slate-300 whitespace-nowrap">{label}</span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
