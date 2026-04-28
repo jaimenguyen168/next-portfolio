@@ -38,7 +38,7 @@ export default function ProjectDetailsView({ project }: Props) {
     .filter(Boolean);
 
   return (
-    <div className="min-h-screen px-4 md:px-16 py-12 md:py-24">
+    <div className="min-h-screen px-6 md:px-16 py-12">
       <div className="max-w-3xl mx-auto w-full">
         {/* Back */}
         <motion.div
@@ -142,14 +142,14 @@ export default function ProjectDetailsView({ project }: Props) {
           transition={{ duration: 0.45, delay: 0.25, ease: "easeOut" }}
         >
           {project.githubUrl ? (
-            <a
+            <Link
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium border border-white/15 text-slate-200 hover:bg-white/5 transition-colors"
             >
               <Code2 size={16} /> View Code
-            </a>
+            </Link>
           ) : (
             <button
               disabled
@@ -160,14 +160,14 @@ export default function ProjectDetailsView({ project }: Props) {
           )}
 
           {project.demoUrl ? (
-            <a
+            <Link
               href={project.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium text-white bg-purple-gradient hover:opacity-90 transition-opacity"
             >
               <ExternalLink size={16} /> Live Demo
-            </a>
+            </Link>
           ) : (
             <button
               disabled

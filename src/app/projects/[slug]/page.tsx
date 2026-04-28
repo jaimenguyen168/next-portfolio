@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { sanityFetch } from "@/sanity/lib/live";
 import { PROJECT_BY_SLUG_QUERY } from "@/sanity/queries/projectQueries";
-import ProjectDetailsView from "@/features/views/project-details-view";
+import ProjectDetailsView from "@/features/projects/views/project-details-view";
 
 type Props = {
   params: Promise<{ slug: string }>;

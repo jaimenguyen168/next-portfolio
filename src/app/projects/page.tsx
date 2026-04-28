@@ -1,6 +1,6 @@
 import { sanityFetch } from "@/sanity/lib/live";
 import { ALL_PROJECTS_QUERY } from "@/sanity/queries/projectQueries";
-import ProjectsView from "@/features/views/projects-view";
+import ProjectsView from "@/features/projects/views/projects-view";
 
 export const metadata = {
   title: "Projects | Jaime",
