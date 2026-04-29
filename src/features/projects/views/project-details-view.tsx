@@ -61,9 +61,10 @@ export default function ProjectDetailsView({ project }: Props) {
         >
           <Link
             href="/projects"
+            aria-label="Back to all projects"
             className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-white transition-colors"
           >
-            <ArrowLeft size={15} /> All projects
+            <ArrowLeft size={15} aria-hidden="true" /> All projects
           </Link>
         </motion.div>
 
@@ -158,16 +159,18 @@ export default function ProjectDetailsView({ project }: Props) {
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`View source code for ${project.title} on GitHub`}
               className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium border border-white/15 text-slate-200 hover:bg-white/5 transition-colors"
             >
-              <Code2 size={16} /> View Code
+              <Code2 size={16} aria-hidden="true" /> View Code
             </Link>
           ) : (
             <button
               disabled
+              aria-label="Source code not available"
               className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium border border-white/10 text-slate-500 cursor-not-allowed"
             >
-              <Code2 size={16} /> View Code
+              <Code2 size={16} aria-hidden="true" /> View Code
             </button>
           )}
 
@@ -176,16 +179,18 @@ export default function ProjectDetailsView({ project }: Props) {
               href={project.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`View live demo for ${project.title}`}
               className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium text-white bg-purple-gradient hover:opacity-90 transition-opacity"
             >
-              <ExternalLink size={16} /> Live Demo
+              <ExternalLink size={16} aria-hidden="true" /> Live Demo
             </Link>
           ) : (
             <button
               disabled
+              aria-label="Live demo not available"
               className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium text-white/40 bg-purple-gradient opacity-40 cursor-not-allowed"
             >
-              <ExternalLink size={16} /> Live Demo
+              <ExternalLink size={16} aria-hidden="true" /> Live Demo
             </button>
           )}
         </motion.div>

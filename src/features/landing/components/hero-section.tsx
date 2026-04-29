@@ -120,10 +120,12 @@ export default function HeroSection() {
         variants={{ show: { transition: { staggerChildren: 0 } } }}
       >
         {/* Icons — slot machine */}
-        <div className="flex items-center gap-3 md:gap-6 mb-6 md:mb-10">
+        <div role="list" aria-label="Technologies" className="flex items-center gap-3 md:gap-6 mb-6 md:mb-10">
           {icons.map((entry, i) => (
             <motion.div
               key={i}
+              role="listitem"
+              aria-label={entry.label}
               className="size-12 md:size-16 rounded-xl flex items-center justify-center card relative overflow-hidden"
               initial={{ opacity: 0, scale: 1.4 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -159,12 +161,14 @@ export default function HeroSection() {
         <motion.div className="flex items-center gap-4" variants={fadeUp}>
           <Link
             href="#projects"
+            aria-label="View my projects"
             className="px-7 py-3 rounded-lg font-semibold text-white text-sm bg-purple-gradient hover:opacity-90 transition-opacity"
           >
             View Projects
           </Link>
           <Link
             href="#contact"
+            aria-label="Get in touch with me"
             className="px-7 py-3 rounded-lg font-semibold text-sm border border-white/20 text-slate-300 hover:border-white/40 transition-colors"
           >
             Get In Touch

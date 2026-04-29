@@ -32,7 +32,7 @@ export default function AboutSection() {
     <section id="about" className="section-full px-4 md:px-16 py-6 md:py-24">
       <div className="max-w-5xl mx-auto w-full">
         <motion.div
-          className="flex flex-col md:flex-row items-center gap-6 md:gap-12 mb-5 md:mb-16"
+          className="flex flex-col md:flex-row items-center gap-6 md:gap-12 mb-5 md:mb-8"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false }}
@@ -62,15 +62,17 @@ export default function AboutSection() {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
+        <div role="list" aria-label="Core strengths" className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
           {features.map((f, i) => (
             <motion.div
               key={f.title}
+              role="listitem"
+              aria-label={f.title}
               className="card p-3 md:p-6 flex flex-col gap-2 md:gap-4 cursor-default hover:bg-white/[0.07]! hover:border-white/20! hover:scale-105 transition-all duration-300"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false }}
-              transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
+              transition={{ duration: 0.25, delay: i * 0.1, ease: "easeOut" }}
             >
               <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg flex items-center justify-center bg-icon-purple text-accent-light">
                 <f.icon size={16} className="md:hidden" />

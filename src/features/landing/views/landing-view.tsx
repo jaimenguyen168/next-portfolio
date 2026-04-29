@@ -18,8 +18,6 @@ type Props = {
 };
 
 export default function LandingView({ activeSkills, projects, resumeUrl }: Props) {
-  // Keep the URL hash in sync with whichever section is most visible,
-  // so refreshing the page returns to the same section.
   useEffect(() => {
     const sectionIds = ["hero", "about", "skills", "projects", "contact"];
 

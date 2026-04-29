@@ -87,32 +87,37 @@ export default function ContactSection() {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs md:text-sm font-medium text-white">Name</label>
+              <label htmlFor="contact-name" className="text-xs md:text-sm font-medium text-white">Name</label>
               <input
+                id="contact-name"
                 type="text"
                 placeholder="Your Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
+                autoComplete="name"
                 disabled={status === "loading" || status === "success"}
                 className="w-full px-3 py-2 md:px-4 md:py-3 rounded-lg text-sm text-slate-200 bg-surface border-subtle outline-none placeholder:text-muted-foreground disabled:opacity-50"
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs md:text-sm font-medium text-white">Email</label>
+              <label htmlFor="contact-email" className="text-xs md:text-sm font-medium text-white">Email</label>
               <input
+                id="contact-email"
                 type="email"
                 placeholder="your.email@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                autoComplete="email"
                 disabled={status === "loading" || status === "success"}
                 className="w-full px-3 py-2 md:px-4 md:py-3 rounded-lg text-sm text-slate-200 bg-surface border-subtle outline-none placeholder:text-muted-foreground disabled:opacity-50"
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs md:text-sm font-medium text-white">Message</label>
+              <label htmlFor="contact-message" className="text-xs md:text-sm font-medium text-white">Message</label>
               <textarea
+                id="contact-message"
                 rows={4}
                 placeholder="Tell me about your project..."
                 value={message}
@@ -207,9 +212,11 @@ export default function ContactSection() {
                   key={link.label}
                   href={link.href}
                   target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit my ${link.label} profile`}
                   className="w-10 h-10 rounded-lg flex items-center justify-center bg-surface hover:bg-white/[0.07] transition-colors text-accent-light"
                 >
-                  {link.icon}
+                  <span aria-hidden="true">{link.icon}</span>
                 </Link>
               ))}
             </motion.div>
@@ -227,9 +234,11 @@ export default function ContactSection() {
                 <Link
                   href={link.href}
                   target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit my ${link.label} profile`}
                   className="flex items-center gap-4 px-4 py-3 rounded-lg bg-surface hover:bg-white/[0.07] transition-colors"
                 >
-                  <div className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-icon-indigo text-accent-light">
+                  <div aria-hidden="true" className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-icon-indigo text-accent-light">
                     {link.icon}
                   </div>
                   <span className="text-sm font-medium text-white">{link.label}</span>
@@ -267,6 +276,7 @@ export default function ContactSection() {
               if (main && hero) main.scrollTo({ top: (hero as HTMLElement).offsetTop, behavior: "smooth" });
               window.history.replaceState(null, "", "/");
             }}
+            aria-label="Back to top"
             className="flex items-center gap-2 cursor-pointer"
           >
             <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-gradient">
@@ -284,9 +294,10 @@ export default function ContactSection() {
             href="https://github.com/jaimenguyen168/NextJS-Portfolio"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="View portfolio source code on GitHub"
             className="flex items-center gap-2 text-xs text-muted-foreground hover:text-white transition-colors"
           >
-            <SiGithub size={14} /> Source code
+            <SiGithub size={14} aria-hidden="true" /> Source code
           </Link>
         </div>
       </motion.footer>

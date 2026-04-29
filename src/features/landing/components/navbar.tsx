@@ -65,6 +65,7 @@ export default function Navbar({ resumeUrl }: Props) {
         {/* Logo — scrolls back to hero */}
         <button
           onClick={(e) => handleNavClick(e, "#hero")}
+          aria-label="Go to top"
           className="flex items-center gap-3 cursor-pointer"
         >
           <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-purple-gradient">

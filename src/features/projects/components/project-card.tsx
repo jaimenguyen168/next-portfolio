@@ -71,6 +71,10 @@ export default function ProjectCard({
       {...animationProps}
       whileHover={{ y: -6, transition: { duration: 0.25, ease: "easeOut" } }}
       onClick={() => project.slug && router.push(`/projects/${project.slug}`)}
+      role="article"
+      aria-label={project.title}
+      tabIndex={0}
+      onKeyDown={(e) => e.key === "Enter" && project.slug && router.push(`/projects/${project.slug}`)}
     >
       {/* Image */}
       <div className="overflow-hidden h-28 md:h-48 shrink-0 relative">
@@ -147,17 +151,19 @@ export default function ProjectCard({
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`View source code for ${project.title} on GitHub`}
               onClick={(e) => e.stopPropagation()}
               className="flex-1 flex items-center justify-center gap-1 py-1.5 md:py-2.5 rounded-lg text-xs font-medium border border-white/15 text-slate-200 bg-transparent hover:bg-white/5 transition-colors"
             >
-              <Code2 size={14} /> <span className="hidden md:inline">Code</span>
+              <Code2 size={14} aria-hidden="true" /> <span className="hidden md:inline">Code</span>
             </Link>
           ) : (
             <button
               disabled
+              aria-label={`Source code for ${project.title} is not available`}
               className="flex-1 flex items-center justify-center gap-1 py-1.5 md:py-2.5 rounded-lg text-xs font-medium border border-white/10 text-slate-500 bg-transparent cursor-not-allowed"
             >
-              <Code2 size={14} /> <span className="hidden md:inline">Code</span>
+              <Code2 size={14} aria-hidden="true" /> <span className="hidden md:inline">Code</span>
             </button>
           )}
 
@@ -166,18 +172,20 @@ export default function ProjectCard({
               href={project.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`View live demo for ${project.title}`}
               onClick={(e) => e.stopPropagation()}
               className="flex-1 flex items-center justify-center gap-1 py-1.5 md:py-2.5 rounded-lg text-xs font-medium text-white bg-purple-gradient hover:opacity-90 transition-opacity"
             >
-              <ExternalLink size={14} />{" "}
+              <ExternalLink size={14} aria-hidden="true" />{" "}
               <span className="hidden md:inline">Demo</span>
             </Link>
           ) : (
             <button
               disabled
+              aria-label={`Live demo for ${project.title} is not available`}
               className="flex-1 flex items-center justify-center gap-1 py-1.5 md:py-2.5 rounded-lg text-xs font-medium text-white/40 bg-purple-gradient opacity-40 cursor-not-allowed"
             >
-              <ExternalLink size={14} />{" "}
+              <ExternalLink size={14} aria-hidden="true" />{" "}
               <span className="hidden md:inline">Demo</span>
             </button>
           )}
