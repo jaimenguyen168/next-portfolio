@@ -18,8 +18,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function ProjectsPage() {
-  const { data: projects } = await sanityFetch({ query: ALL_PROJECTS_QUERY });
+type Props = {
+  searchParams: Promise<{ skill?: string | string[] }>;
+};
 
-  return <ProjectsView projects={projects ?? []} />;
+export default async function ProjectsPage({ searchParams }: Props) {
+  const { data: projects } = await sanityFetch({ query: ALL_PROJECTS_QUERY });
+  const { skill } = await searchParams;
+
+  const initialSkills = skill
+    ? Array.isArray(skill) ? skill : [skill]
+    : [];
+
+  return <ProjectsView projects={projects ?? []} initialSkills={initialSkills} />;
 }

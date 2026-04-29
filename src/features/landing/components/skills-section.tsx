@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { SKILL_META } from "@/sanity/constants/skillMeta";
 import { SKILL_CATEGORIES } from "@/sanity/constants/skillCategories";
 
@@ -16,8 +17,8 @@ export default function SkillsSection({ activeSkills }: Props) {
     accentClass: cat.accentClass,
     skills: cat.skills
       .filter((value) => activeSet.has(value))
-      .map((value) => SKILL_META[value])
-      .filter(Boolean),
+      .map((value) => ({ ...SKILL_META[value], value }))
+      .filter((s) => s.icon),
   })).filter((cat) => cat.skills.length > 0);
 
   return (
@@ -55,10 +56,9 @@ export default function SkillsSection({ activeSkills }: Props) {
               </div>
 
               <div className="flex flex-wrap gap-2 md:gap-3">
-                {cat.skills.map(({ icon: Icon, label, color }) => (
+                {cat.skills.map(({ icon: Icon, label, color, value }) => (
                   <motion.div
                     key={label}
-                    className="flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-md px-2 py-1 md:px-3 md:py-1.5 cursor-default"
                     whileHover={{
                       scale: 1.08,
                       backgroundColor: "rgba(255,255,255,0.1)",
@@ -66,9 +66,15 @@ export default function SkillsSection({ activeSkills }: Props) {
                     }}
                     transition={{ duration: 0.15, ease: "easeOut" }}
                   >
-                    <Icon size={14} color={color} className="md:hidden" />
-                    <Icon size={16} color={color} className="hidden md:block" />
-                    <span className="text-xs text-slate-300 whitespace-nowrap">{label}</span>
+                    <Link
+                      href={`/projects?skill=${encodeURIComponent(value)}`}
+                      className="flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-md px-2 py-1 md:px-3 md:py-1.5 cursor-pointer"
+                      aria-label={`View projects using ${label}`}
+                    >
+                      <Icon size={14} color={color} className="md:hidden" />
+                      <Icon size={16} color={color} className="hidden md:block" />
+                      <span className="text-xs text-slate-300 whitespace-nowrap">{label}</span>
+                    </Link>
                   </motion.div>
                 ))}
               </div>
