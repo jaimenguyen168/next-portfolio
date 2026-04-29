@@ -2,10 +2,16 @@
 
 import Link from "next/link";
 import { Code2Icon } from "lucide-react";
+import ResumeButton from "@/features/shared/components/resume-button";
+
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-export default function ProjectsHeader() {
+type Props = {
+  resumeUrl: string | null;
+};
+
+export default function ProjectsHeader({ resumeUrl }: Props) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -37,13 +43,7 @@ export default function ProjectsHeader() {
         <span className="text-white font-semibold text-base">Jaime Dev</span>
       </Link>
 
-      {/* Hire Me */}
-      <Link
-        href="/#contact"
-        className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-purple-gradient hover:opacity-90 transition-opacity"
-      >
-        Hire Me
-      </Link>
+      <ResumeButton resumeUrl={resumeUrl} />
     </motion.nav>
   );
 }

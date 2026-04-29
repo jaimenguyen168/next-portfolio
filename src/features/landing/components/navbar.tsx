@@ -4,10 +4,15 @@ import Link from "next/link";
 import { Code2Icon, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import ResumeButton from "@/features/shared/components/resume-button";
 
 const links = ["About", "Skills", "Projects", "Contact"];
 
-export default function Navbar() {
+type Props = {
+  resumeUrl: string | null;
+};
+
+export default function Navbar({ resumeUrl }: Props) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -51,12 +56,7 @@ export default function Navbar() {
               {link}
             </Link>
           ))}
-          <Link
-            href="#contact"
-            className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-purple-gradient hover:opacity-90 transition-opacity"
-          >
-            Hire Me
-          </Link>
+          <ResumeButton resumeUrl={resumeUrl} />
         </div>
 
         {/* Mobile hamburger */}
@@ -125,13 +125,11 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.35 }}
               >
-                <Link
-                  href="#contact"
-                  onClick={() => setOpen(false)}
-                  className="mt-4 w-full text-center py-3 rounded-lg text-sm font-medium text-white bg-purple-gradient hover:opacity-90 transition-opacity block"
-                >
-                  Hire Me
-                </Link>
+                <ResumeButton
+                  resumeUrl={resumeUrl}
+                  className="mt-4 w-full justify-center py-3"
+                  onAfterClick={() => setOpen(false)}
+                />
               </motion.div>
             </motion.div>
           </>

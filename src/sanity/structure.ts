@@ -1,7 +1,19 @@
-import type {StructureResolver} from 'sanity/structure'
+import type { StructureResolver } from "sanity/structure";
 
-// https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
   S.list()
-    .title('Content')
-    .items(S.documentTypeListItems())
+    .title("Content")
+    .items([
+      // Singleton — only one resume document ever exists
+      S.listItem()
+        .title("Resume")
+        .id("resume")
+        .child(
+          S.document()
+            .schemaType("resume")
+            .documentId("resume")
+        ),
+      S.divider(),
+      S.documentTypeListItem("project").title("Projects"),
+      S.documentTypeListItem("skill").title("Skills"),
+    ]);

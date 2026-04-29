@@ -9,12 +9,13 @@ import type { Project } from "../components/projects-section";
 type Props = {
   activeSkills: string[];
   projects: Project[];
+  resumeUrl: string | null;
 };
 
-export default function LandingView({ activeSkills, projects }: Props) {
+export default function LandingView({ activeSkills, projects, resumeUrl }: Props) {
   return (
     <>
-      <Navbar />
+      <Navbar resumeUrl={resumeUrl} />
       <main>
         <HeroSection />
         <AboutSection />
