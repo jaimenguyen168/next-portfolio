@@ -28,7 +28,7 @@ function adminEmailHtml(name: string, email: string, message: string) {
                   <td style="background:linear-gradient(135deg,#6d28d9,#4f46e5);border-radius:10px;width:36px;height:36px;text-align:center;vertical-align:middle;">
                     <span style="color:#ffffff;font-size:16px;font-weight:700;">&lt;/&gt;</span>
                   </td>
-                  <td style="padding-left:10px;color:#ffffff;font-size:15px;font-weight:700;vertical-align:middle;">Jaime Dev</td>
+                  <td style="padding-left:10px;color:#ffffff;font-size:15px;font-weight:700;vertical-align:middle;">Jaime Nguyen</td>
                 </tr>
               </table>
             </td>
@@ -111,7 +111,7 @@ function adminEmailHtml(name: string, email: string, message: string) {
             <td style="padding-top:28px;text-align:center;">
               <p style="margin:0;color:#3d4a6b;font-size:12px;line-height:1.6;">
                 This notification was sent to you because someone submitted the contact form on your portfolio.<br>
-                &copy; 2025 Jaime Dev. All rights reserved.
+                &copy; 2025 Jaime Nguyen. All rights reserved.
               </p>
             </td>
           </tr>
@@ -148,7 +148,7 @@ function confirmationEmailHtml(name: string, message: string) {
                   <td style="background:linear-gradient(135deg,#6d28d9,#4f46e5);border-radius:10px;width:36px;height:36px;text-align:center;vertical-align:middle;">
                     <span style="color:#ffffff;font-size:16px;font-weight:700;">&lt;/&gt;</span>
                   </td>
-                  <td style="padding-left:10px;color:#ffffff;font-size:15px;font-weight:700;vertical-align:middle;">Jaime Dev</td>
+                  <td style="padding-left:10px;color:#ffffff;font-size:15px;font-weight:700;vertical-align:middle;">Jaime Nguyen</td>
                 </tr>
               </table>
             </td>
@@ -243,7 +243,7 @@ function confirmationEmailHtml(name: string, message: string) {
             <td style="padding-top:28px;text-align:center;">
               <p style="margin:0;color:#3d4a6b;font-size:12px;line-height:1.6;">
                 You received this email because you submitted a contact form on jaimenguyen.com.<br>
-                &copy; 2025 Jaime Dev &nbsp;&middot;&nbsp; Ship fast. Build well.
+                &copy; 2025 Jaime Nguyen &nbsp;&middot;&nbsp; Ship fast. Build well.
               </p>
             </td>
           </tr>
@@ -268,14 +268,14 @@ export async function POST(request: Request) {
 
     const [adminResult, confirmResult] = await Promise.all([
       resend.emails.send({
-        from: "Jaime Dev Portfolio <noreply@jaimenguyen.com>",
+        from: "Jaime Nguyen Portfolio <noreply@jaimenguyen.com>",
         to: [MY_EMAIL],
         replyTo: email,
         subject: `New message from ${name}`,
         html: adminEmailHtml(name, email, message),
       }),
       resend.emails.send({
-        from: "Jaime Dev <hello@jaimenguyen.com>",
+        from: "Jaime Nguyen <hello@jaimenguyen.com>",
         to: [email],
         subject: `Thank you for reaching out, ${name}`,
         html: confirmationEmailHtml(name, message),

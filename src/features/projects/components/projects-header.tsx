@@ -40,7 +40,7 @@ export default function ProjectsHeader({ resumeUrl }: Props) {
         <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-purple-gradient">
           <Code2Icon size={18} className="text-white" />
         </div>
-        <span className="text-white font-semibold text-base">Jaime Dev</span>
+        <span className="text-white font-semibold text-base">Jaime Nguyen</span>
       </Link>
 
       <ResumeButton resumeUrl={resumeUrl} />

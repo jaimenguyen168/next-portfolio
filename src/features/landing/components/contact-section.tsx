@@ -272,7 +272,7 @@ export default function ContactSection() {
             <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-gradient">
               <Code2Icon size={16} className="text-white" />
             </div>
-            <span className="text-white text-sm font-semibold">Jaime Dev</span>
+            <span className="text-white text-sm font-semibold">Jaime Nguyen</span>
           </button>
           <p className="text-xs text-muted-foreground text-center">
             Built with{" "}

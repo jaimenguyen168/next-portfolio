@@ -2,6 +2,7 @@
 
 import { Palette, Scale, Wrench, Layers } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const features = [
   {
@@ -31,18 +32,32 @@ export default function AboutSection() {
     <section id="about" className="section-full px-4 md:px-16 py-6 md:py-24">
       <div className="max-w-5xl mx-auto w-full">
         <motion.div
-          className="text-center mb-5 md:mb-16"
+          className="flex flex-col md:flex-row items-center gap-6 md:gap-12 mb-5 md:mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <h2 className="text-2xl md:text-5xl font-bold mb-2 md:mb-6 gradient-text-blue">About Me</h2>
-          <p className="text-xs md:text-base max-w-2xl mx-auto leading-relaxed text-muted-foreground">
-            Frontend and mobile developer focused on building polished, production-ready products.
-            I work across web and mobile, from Next.js apps to React Native and SwiftUI experiences,
-            always reaching for the right tool to get things done properly.
-          </p>
+          {/* Avatar */}
+          <div className="shrink-0 w-20 h-20 md:w-36 md:h-36 rounded-2xl overflow-hidden border border-white/10 shadow-lg shadow-indigo-500/10">
+            <Image
+              src="/jaime.png"
+              alt="Jaime Nguyen"
+              width={144}
+              height={144}
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* Text */}
+          <div className="text-center md:text-left">
+            <h2 className="text-2xl md:text-5xl font-bold mb-2 md:mb-4 gradient-text-blue">About Me</h2>
+            <p className="text-xs md:text-base max-w-2xl leading-relaxed text-muted-foreground">
+              Frontend and mobile developer focused on building polished, production-ready products.
+              I work across web and mobile, from Next.js apps to React Native and SwiftUI experiences,
+              always reaching for the right tool to get things done properly.
+            </p>
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
