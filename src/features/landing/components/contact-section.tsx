@@ -245,7 +245,7 @@ export default function ContactSection() {
               transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
             >
               <p className="text-sm font-medium mb-1 text-accent-light">Available for:</p>
-              <p className="text-sm text-muted-foreground">Freelance projects, Full-time opportunities, Collaborations</p>
+              <p className="text-sm text-muted-foreground">Full-time opportunities, Freelance projects & Collaborations</p>
             </motion.div>
           </div>
         </div>
@@ -253,26 +253,41 @@ export default function ContactSection() {
 
       {/* Footer */}
       <motion.footer
-        className="pt-6 md:pt-8 w-full border-top-subtle mt-6 md:mt-10"
+        className="pt-6 md:pt-8 w-full mt-6 md:mt-10"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
-          <Link href="/" className="flex items-center gap-2">
+          <button
+            onClick={() => {
+              const main = document.querySelector("main");
+              const hero = document.querySelector("#hero");
+              if (main && hero) main.scrollTo({ top: (hero as HTMLElement).offsetTop, behavior: "smooth" });
+              window.history.replaceState(null, "", "/");
+            }}
+            className="flex items-center gap-2 cursor-pointer"
+          >
             <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-gradient">
               <Code2Icon size={16} className="text-white" />
             </div>
             <span className="text-white text-sm font-semibold">Jaime Dev</span>
-          </Link>
+          </button>
           <p className="text-xs text-muted-foreground text-center">
             Built with{" "}
             <span className="text-accent-light">Next.js</span>{" "}
             &amp;{" "}
             <span className="text-emerald-400">Sanity</span>
           </p>
-          <p className="text-xs text-muted-foreground">Ship fast. Build well.</p>
+          <Link
+            href="https://github.com/jaimenguyen168/NextJS-Portfolio"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-xs text-muted-foreground hover:text-white transition-colors"
+          >
+            <SiGithub size={14} /> Source code
+          </Link>
         </div>
       </motion.footer>
     </section>
