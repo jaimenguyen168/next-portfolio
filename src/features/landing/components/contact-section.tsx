@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Code2Icon, Mail } from "lucide-react";
+import { Code2Icon, Mail, Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa";
+import { useState } from "react";
 
 const socialLinks = [
   {
@@ -24,7 +25,38 @@ const socialLinks = [
   },
 ];
 
+type Status = "idle" | "loading" | "success" | "error";
+
 export default function ContactSection() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<Status>("idle");
+
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!name.trim() || !email.trim() || !message.trim()) return;
+
+    setStatus("loading");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      if (!res.ok) throw new Error("Failed");
+
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch {
+      setStatus("error");
+    }
+  };
+
   return (
     <section id="contact" className="section-full px-6 md:px-16 py-6 md:py-12 flex flex-col justify-between">
       <div className="max-w-5xl mx-auto w-full flex-1 flex flex-col justify-center">
@@ -45,8 +77,9 @@ export default function ContactSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 items-start">
 
-          {/* Left — slides in from left */}
+          {/* Left — form */}
           <motion.form
+            onSubmit={handleSubmit}
             className="flex flex-col gap-3 md:gap-5"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -58,7 +91,11 @@ export default function ContactSection() {
               <input
                 type="text"
                 placeholder="Your Name"
-                className="w-full px-3 py-2 md:px-4 md:py-3 rounded-lg text-sm text-slate-200 bg-surface border-subtle outline-none placeholder:text-muted-foreground"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                disabled={status === "loading" || status === "success"}
+                className="w-full px-3 py-2 md:px-4 md:py-3 rounded-lg text-sm text-slate-200 bg-surface border-subtle outline-none placeholder:text-muted-foreground disabled:opacity-50"
               />
             </div>
             <div className="flex flex-col gap-1.5">
@@ -66,7 +103,11 @@ export default function ContactSection() {
               <input
                 type="email"
                 placeholder="your.email@example.com"
-                className="w-full px-3 py-2 md:px-4 md:py-3 rounded-lg text-sm text-slate-200 bg-surface border-subtle outline-none placeholder:text-muted-foreground"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                disabled={status === "loading" || status === "success"}
+                className="w-full px-3 py-2 md:px-4 md:py-3 rounded-lg text-sm text-slate-200 bg-surface border-subtle outline-none placeholder:text-muted-foreground disabled:opacity-50"
               />
             </div>
             <div className="flex flex-col gap-1.5">
@@ -74,18 +115,58 @@ export default function ContactSection() {
               <textarea
                 rows={4}
                 placeholder="Tell me about your project..."
-                className="w-full px-3 py-2 md:px-4 md:py-3 rounded-lg text-sm text-slate-200 bg-surface border-subtle outline-none resize-none placeholder:text-muted-foreground"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                required
+                disabled={status === "loading" || status === "success"}
+                className="w-full px-3 py-2 md:px-4 md:py-3 rounded-lg text-sm text-slate-200 bg-surface border-subtle outline-none resize-none placeholder:text-muted-foreground disabled:opacity-50"
               />
             </div>
+
+            {/* Feedback */}
+            {status === "success" && (
+              <motion.div
+                className="flex items-center gap-2 px-4 py-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm"
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <CheckCircle2 size={15} className="shrink-0" />
+                Message sent! I&apos;ll get back to you soon.
+              </motion.div>
+            )}
+            {status === "error" && (
+              <motion.div
+                className="flex items-center gap-2 px-4 py-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm"
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <AlertCircle size={15} className="shrink-0" />
+                Something went wrong. Please try again.
+              </motion.div>
+            )}
+
             <button
               type="submit"
-              className="w-full py-2.5 md:py-3 rounded-lg font-medium text-white text-sm bg-purple-gradient hover:opacity-90 transition-opacity"
+              disabled={status === "loading" || status === "success" || !name || !email || !message}
+              className="w-full flex items-center justify-center gap-2 py-2.5 md:py-3 rounded-lg font-medium text-white text-sm bg-purple-gradient hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Send Message
+              {status === "loading" ? (
+                <>
+                  <Loader2 size={15} className="animate-spin" /> Sending...
+                </>
+              ) : status === "success" ? (
+                <>
+                  <CheckCircle2 size={15} /> Sent!
+                </>
+              ) : (
+                <>
+                  <Send size={15} /> Send Message
+                </>
+              )}
             </button>
           </motion.form>
 
-          {/* Right — slides in from right */}
+          {/* Right */}
           <div className="flex flex-col gap-3 md:gap-4">
 
             {/* Title — desktop only */}
