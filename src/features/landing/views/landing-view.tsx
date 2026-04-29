@@ -21,6 +21,8 @@ export default function LandingView({ activeSkills, projects, resumeUrl }: Props
   useEffect(() => {
     const sectionIds = ["hero", "about", "skills", "projects", "contact"];
 
+    const main = document.querySelector("main");
+
     const observers = sectionIds.map((id) => {
       const el = document.querySelector(`#${id}`);
       if (!el) return null;
@@ -31,7 +33,7 @@ export default function LandingView({ activeSkills, projects, resumeUrl }: Props
             window.history.replaceState(null, "", hash);
           }
         },
-        { threshold: 0.5 }
+        { root: main, threshold: 0.1 }
       );
       obs.observe(el);
       return obs;

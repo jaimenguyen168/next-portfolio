@@ -28,10 +28,11 @@ export default function Navbar({ resumeUrl }: Props) {
   // Blur when hero leaves viewport
   useEffect(() => {
     const hero = document.querySelector("#hero");
+    const main = document.querySelector("main");
     if (!hero) return;
     const observer = new IntersectionObserver(
       ([entry]) => setScrolled(!entry.isIntersecting),
-      { threshold: 0.1 }
+      { root: main, threshold: 0.1 }
     );
     observer.observe(hero);
     return () => observer.disconnect();

@@ -3,15 +3,100 @@
 import Link from "next/link";
 import FloatingDots from "./floating-dots";
 import ScrollIndicator from "./scroll-indicator";
-import { SiNextdotjs, SiReact, SiExpo, SiSwift } from "react-icons/si";
-import { motion } from "framer-motion";
+import { SiNextdotjs, SiReact, SiExpo, SiSwift, SiClerk, SiOpenai, SiTailwindcss, SiGithub, SiVite, SiTrpc, SiTypescript } from "react-icons/si";
+import { Zap } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
-const techIcons = [
-  { icon: SiNextdotjs, color: "#ffffff", label: "Next.js" },
-  { icon: SiReact,     color: "#818cf8", label: "React Native" },
-  { icon: SiExpo,      color: "#f59e0b", label: "Expo" },
-  { icon: SiSwift,     color: "#f05138", label: "SwiftUI" },
+type TechIcon = { icon: React.ElementType; color: string; label: string };
+
+const FIXED_ICONS: TechIcon[] = [
+  { icon: SiNextdotjs, color: "#ffffff",  label: "Next.js" },
+  { icon: SiReact,     color: "#818cf8",  label: "React Native" },
+  { icon: SiExpo,      color: "#f59e0b",  label: "Expo" },
+  { icon: SiSwift,     color: "#f05138",  label: "SwiftUI" },
 ];
+
+const POOL_ICONS: TechIcon[] = [
+  { icon: SiClerk,       color: "#6c47ff", label: "Clerk" },
+  { icon: SiOpenai,      color: "#ffffff", label: "OpenAI" },
+  { icon: SiTailwindcss, color: "#38bdf8", label: "Tailwind" },
+  { icon: SiGithub,      color: "#ffffff", label: "GitHub" },
+  { icon: Zap,           color: "#f59e0b", label: "Inngest" },
+  { icon: SiVite,        color: "#a78bfa", label: "Vite" },
+  { icon: SiTrpc,        color: "#398ccb", label: "tRPC" },
+  { icon: SiTypescript,  color: "#3178c6", label: "TypeScript" },
+];
+
+function SlotIcon({ entry }: { entry: TechIcon }) {
+  const Icon = entry.icon;
+  return (
+    <AnimatePresence mode="popLayout">
+      <motion.div
+        key={entry.label}
+        initial={{ y: "-100%", opacity: 0 }}
+        animate={{ y: "0%",    opacity: 1 }}
+        exit={{    y: "100%",  opacity: 0 }}
+        transition={{ duration: 0.35, ease: "easeInOut" }}
+        className="absolute inset-0 flex items-center justify-center"
+      >
+        <Icon size={26} color={entry.color} className="md:hidden" />
+        <Icon size={36} color={entry.color} className="hidden md:block" />
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
+const ALL_ICONS: TechIcon[] = [...FIXED_ICONS, ...POOL_ICONS];
+
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function useSlotMachine(initialIcons: TechIcon[]) {
+  // Store everything in one ref so mutations are always in sync
+  const stateRef = useRef({
+    icons: [...initialIcons],
+    available: ALL_ICONS.filter((i) => !initialIcons.some((s) => s.label === i.label)),
+    slotQueue: [] as number[],
+  });
+
+  const [icons, setIcons] = useState<TechIcon[]>(initialIcons);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const s = stateRef.current;
+
+      // Refill slot queue when empty
+      if (s.slotQueue.length === 0) {
+        s.slotQueue = shuffle([0, 1, 2, 3]);
+      }
+      const slotIdx = s.slotQueue.pop()!;
+
+      // Pick random incoming — guaranteed not currently shown
+      const pickIdx = Math.floor(Math.random() * s.available.length);
+      const incoming = s.available[pickIdx];
+      const outgoing = s.icons[slotIdx];
+
+      // Swap in the ref synchronously
+      s.available.splice(pickIdx, 1);
+      s.available.push(outgoing);
+      s.icons[slotIdx] = incoming;
+
+      // Trigger re-render with a fresh array copy
+      setIcons([...s.icons]);
+    }, 1500);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return icons;
+}
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -19,6 +104,8 @@ const fadeUp = {
 };
 
 export default function HeroSection() {
+  const icons = useSlotMachine(FIXED_ICONS);
+
   return (
     <section
       id="hero"
@@ -32,18 +119,17 @@ export default function HeroSection() {
         animate="show"
         variants={{ show: { transition: { staggerChildren: 0 } } }}
       >
-        {/* Icons — zoom out, all at once */}
+        {/* Icons — slot machine */}
         <div className="flex items-center gap-3 md:gap-6 mb-6 md:mb-10">
-          {techIcons.map(({ icon: Icon, color, label }, i) => (
+          {icons.map((entry, i) => (
             <motion.div
-              key={label}
-              className="size-12 md:size-16 rounded-xl flex items-center justify-center card"
+              key={i}
+              className="size-12 md:size-16 rounded-xl flex items-center justify-center card relative overflow-hidden"
               initial={{ opacity: 0, scale: 1.4 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: i * 0.12, ease: "easeOut" }}
             >
-              <Icon size={26} color={color} className="md:hidden" />
-              <Icon size={36} color={color} className="hidden md:block" />
+              <SlotIcon entry={entry} />
             </motion.div>
           ))}
         </div>
