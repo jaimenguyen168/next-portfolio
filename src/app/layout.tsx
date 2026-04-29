@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SanityLive } from "@/sanity/lib/live";
+import ChatWidgetLoader from "@/features/chat/components/chat-widget-loader";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-geist-sans",
@@ -97,6 +98,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
           {children}
           <SanityLive />
+          <ChatWidgetLoader />
         </body>
     </html>
   );

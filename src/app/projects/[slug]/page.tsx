@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { sanityFetch } from "@/sanity/lib/live";
 import { PROJECT_BY_SLUG_QUERY } from "@/sanity/queries/projectQueries";
 import ProjectDetailsView from "@/features/projects/views/project-details-view";
+import { urlFor } from "@/sanity/lib/image";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ...(project.image && {
         images: [
           {
-            url: project.image,
+            url: urlFor(project.image).width(1200).height(630).fit("crop").url(),
             width: 1200,
             height: 630,
             alt: project.title,
