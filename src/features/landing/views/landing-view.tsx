@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect } from "react";
+import dynamic from "next/dynamic";
 import Navbar from "../components/navbar";
 import HeroSection from "../components/hero-section";
-import AboutSection from "../components/about-section";
-import SkillsSection from "../components/skills-section";
-import ProjectsSection from "../components/projects-section";
-import ContactSection from "../components/contact-section";
 import type { Project } from "../components/projects-section";
+
+const AboutSection    = dynamic(() => import("../components/about-section"));
+const SkillsSection   = dynamic(() => import("../components/skills-section"));
+const ProjectsSection = dynamic(() => import("../components/projects-section"));
+const ContactSection  = dynamic(() => import("../components/contact-section"));
 
 type Props = {
   activeSkills: string[];

@@ -46,6 +46,8 @@ export default function AboutSection() {
               width={144}
               height={144}
               className="w-full h-full object-cover"
+              priority
+              sizes="(max-width: 768px) 80px, 144px"
             />
           </div>
 

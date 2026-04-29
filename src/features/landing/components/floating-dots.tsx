@@ -43,14 +43,21 @@ export default function FloatingDots() {
       }
     };
 
-    const draw = () => {
+    let lastTime = 0;
+    const INTERVAL = 1000 / 30; // cap at 30fps
+
+    const draw = (time: number) => {
+      animationId = requestAnimationFrame(draw);
+      if (document.hidden) return;
+      if (time - lastTime < INTERVAL) return;
+      lastTime = time;
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       for (const dot of dots) {
         dot.x += dot.speedX;
         dot.y += dot.speedY;
 
-        // Wrap around edges
         if (dot.x < -10) dot.x = canvas.width + 10;
         if (dot.x > canvas.width + 10) dot.x = -10;
         if (dot.y < -10) dot.y = canvas.height + 10;
@@ -61,8 +68,6 @@ export default function FloatingDots() {
         ctx.fillStyle = `rgba(139, 92, 246, ${dot.opacity})`;
         ctx.fill();
       }
-
-      animationId = requestAnimationFrame(draw);
     };
 
     resize();

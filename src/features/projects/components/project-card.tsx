@@ -87,7 +87,8 @@ export default function ProjectCard({
               alt={project.title}
               fill
               className="object-cover"
-              sizes="(max-width: 768px) 50vw, 400px"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 40vw, 400px"
+              loading="lazy"
             />
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center gap-1 bg-card-subtle opacity-60">
