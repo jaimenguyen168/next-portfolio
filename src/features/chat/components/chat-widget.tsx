@@ -78,7 +78,7 @@ export default function ChatWidget() {
             exit={{ opacity: 0, scale: 0.88, y: 24, rotateX: -12 }}
             transition={{ type: "spring", stiffness: 300, damping: 26 }}
             style={{ transformOrigin: "bottom right", perspective: 900 }}
-            className="fixed bottom-24 right-4 md:right-6 z-50 w-[calc(100vw-2rem)] max-w-sm flex flex-col rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-purple-950/60"
+            className="fixed bottom-20 right-2 md:bottom-24 md:right-6 z-50 w-[calc(100vw-1rem)] md:w-[calc(100vw-2rem)] max-w-sm flex flex-col rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-purple-950/60 h-[480px] max-h-[calc(100dvh-6rem)]"
             role="dialog"
             aria-modal="true"
             aria-label="Chat with Jaime's AI assistant"
@@ -114,7 +114,7 @@ export default function ChatWidget() {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-[#060c22] min-h-[300px] max-h-[380px]">
+            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-[#060c22] min-h-0">
               {messages.length === 0 && (
                 <motion.div
                   initial={{ opacity: 0, y: 8 }}
@@ -202,7 +202,7 @@ export default function ChatWidget() {
                 placeholder="Ask about Jaime's projects..."
                 disabled={isLoading}
                 aria-label="Chat message input"
-                className="flex-1 bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm text-slate-200 placeholder:text-muted-foreground outline-none focus:border-accent-light/40 transition-colors disabled:opacity-50"
+                className="flex-1 bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-[16px] md:text-sm text-slate-200 placeholder:text-muted-foreground outline-none focus:border-accent-light/40 transition-colors disabled:opacity-50"
               />
               <motion.button
                 type="submit"
