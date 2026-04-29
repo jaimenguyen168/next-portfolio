@@ -4,7 +4,7 @@ export default function ProjectsLayout({ children }: { children: React.ReactNode
   return (
     <>
       <ProjectsHeader />
-      <main className="pt-16">{children}</main>
+      <main className="pt-12">{children}</main>
     </>
   );
 }

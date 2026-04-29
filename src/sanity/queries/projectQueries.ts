@@ -32,9 +32,12 @@ export const PROJECT_BY_SLUG_QUERY = `
     "slug": slug.current,
     description,
     image,
+    images,
     featured,
     "skills": skills[]->{ name },
     githubUrl,
     demoUrl,
+    "features": features[]{ title, description },
+    "upcomingFeatures": upcomingFeatures[]{ title, description },
   }
 `;

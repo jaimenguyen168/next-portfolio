@@ -54,6 +54,54 @@ export const projectType = defineType({
       type: "url",
     }),
     defineField({
+      name: "images",
+      title: "Additional Images",
+      type: "array",
+      description: "Extra screenshots or images shown in the project detail page.",
+      of: [
+        {
+          type: "image",
+          options: { hotspot: true },
+        },
+      ],
+    }),
+    defineField({
+      name: "features",
+      title: "Features",
+      type: "array",
+      description: "Key features of this project.",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({ name: "title", title: "Title", type: "string", validation: (Rule) => Rule.required() }),
+            defineField({ name: "description", title: "Description", type: "string" }),
+          ],
+          preview: {
+            select: { title: "title", subtitle: "description" },
+          },
+        },
+      ],
+    }),
+    defineField({
+      name: "upcomingFeatures",
+      title: "Upcoming Features",
+      type: "array",
+      description: "Features planned for future releases.",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({ name: "title", title: "Title", type: "string", validation: (Rule) => Rule.required() }),
+            defineField({ name: "description", title: "Description", type: "string" }),
+          ],
+          preview: {
+            select: { title: "title", subtitle: "description" },
+          },
+        },
+      ],
+    }),
+    defineField({
       name: "featured",
       title: "Featured",
       type: "boolean",

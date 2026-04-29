@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code2, ExternalLink, Star, ArrowLeft } from "lucide-react";
+import { Code2, ExternalLink, Star, ArrowLeft, CheckCircle2, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
@@ -12,16 +12,24 @@ type SanityImage = {
   asset: { _ref: string; _type: "reference" };
 };
 
+type FeatureItem = {
+  title: string;
+  description?: string;
+};
+
 export type ProjectDetail = {
   _id: string;
   title: string;
   slug?: string;
   description: string;
   image?: SanityImage;
+  images?: SanityImage[];
   featured?: boolean;
   skills: { name: string }[];
   githubUrl?: string;
   demoUrl?: string;
+  features?: FeatureItem[];
+  upcomingFeatures?: FeatureItem[];
 };
 
 type Props = {
@@ -33,13 +41,17 @@ export default function ProjectDetailsView({ project }: Props) {
     ? urlFor(project.image).width(1200).height(600).fit("crop").url()
     : null;
 
+  const extraImageUrls = (project.images ?? []).map((img) =>
+    urlFor(img).width(1200).height(600).fit("crop").url()
+  );
+
   const tags = (project.skills ?? [])
     .map((s) => SKILL_META[s.name])
     .filter(Boolean);
 
   return (
-    <div className="min-h-screen px-6 md:px-16 py-12">
-      <div className="max-w-3xl mx-auto w-full">
+    <div className="min-h-screen px-4 md:px-16 py-18">
+      <div className="max-w-5xl mx-auto w-full">
         {/* Back */}
         <motion.div
           initial={{ opacity: 0, x: -16 }}
@@ -58,7 +70,7 @@ export default function ProjectDetailsView({ project }: Props) {
         {/* Hero image */}
         {imageUrl && (
           <motion.div
-            className="w-full h-52 md:h-80 relative rounded-xl overflow-hidden mb-8 md:mb-10"
+            className="w-full h-64 md:h-120 relative rounded-xl overflow-hidden mb-8 md:mb-10"
             initial={{ opacity: 0, scale: 1.04 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.55, ease: "easeOut" }}
@@ -136,7 +148,7 @@ export default function ProjectDetailsView({ project }: Props) {
 
         {/* CTA buttons */}
         <motion.div
-          className="flex gap-3"
+          className="flex gap-3 mb-10 md:mb-14"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.25, ease: "easeOut" }}
@@ -177,6 +189,105 @@ export default function ProjectDetailsView({ project }: Props) {
             </button>
           )}
         </motion.div>
+
+        {/* Features */}
+        {project.features && project.features.length > 0 && (
+          <motion.div
+            className="mb-10 md:mb-14"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.3, ease: "easeOut" }}
+          >
+            <p className="text-xs text-muted-foreground uppercase tracking-widest mb-4">
+              Features
+            </p>
+            <div className="flex flex-col gap-3">
+              {project.features.map((f, i) => (
+                <motion.div
+                  key={i}
+                  className="flex items-start gap-3 card p-3 md:p-4"
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.35, delay: 0.32 + i * 0.07, ease: "easeOut" }}
+                >
+                  <CheckCircle2 size={16} className="text-emerald-400 shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-white">{f.title}</p>
+                    {f.description && (
+                      <p className="text-xs text-muted-foreground mt-0.5">{f.description}</p>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+
+        {/* Upcoming Features */}
+        {project.upcomingFeatures && project.upcomingFeatures.length > 0 && (
+          <motion.div
+            className="mb-10 md:mb-14"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.35, ease: "easeOut" }}
+          >
+            <p className="text-xs text-muted-foreground uppercase tracking-widest mb-4">
+              Coming Soon
+            </p>
+            <div className="flex flex-col gap-3">
+              {project.upcomingFeatures.map((f, i) => (
+                <motion.div
+                  key={i}
+                  className="flex items-start gap-3 card p-3 md:p-4 opacity-70"
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 0.7, x: 0 }}
+                  transition={{ duration: 0.35, delay: 0.37 + i * 0.07, ease: "easeOut" }}
+                >
+                  <Clock size={16} className="text-indigo-400 shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-white">{f.title}</p>
+                    {f.description && (
+                      <p className="text-xs text-muted-foreground mt-0.5">{f.description}</p>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+
+        {/* Additional images */}
+        {extraImageUrls.length > 0 && (
+          <motion.div
+            className="mb-10 md:mb-14"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.4, ease: "easeOut" }}
+          >
+            <p className="text-xs text-muted-foreground uppercase tracking-widest mb-4">
+              Screenshots
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+              {extraImageUrls.map((url, i) => (
+                <motion.div
+                  key={i}
+                  className="w-full aspect-video relative rounded-xl overflow-hidden"
+                  initial={{ opacity: 0, scale: 1.03 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.45, delay: 0.42 + i * 0.08, ease: "easeOut" }}
+                >
+                  <Image
+                    src={url}
+                    alt={`${project.title} screenshot ${i + 1}`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
       </div>
     </div>
   );

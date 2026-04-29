@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import ProjectCard, { type Project } from "@/features/projects/components/project-card";
+import {ArrowLeft} from "lucide-react";
 
 export type { Project };
 
@@ -12,7 +13,7 @@ type Props = {
 
 export default function ProjectsView({ projects }: Props) {
   return (
-    <div className="min-h-screen px-4 md:px-16 py-12 md:py-24">
+    <div className="min-h-screen px-4 md:px-16 py-18">
       <div className="max-w-5xl mx-auto w-full">
 
         {/* Header */}
@@ -24,9 +25,9 @@ export default function ProjectsView({ projects }: Props) {
         >
           <Link
             href="/"
-            className="text-xs text-muted-foreground hover:text-white transition-colors mb-6 inline-block"
+            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-white transition-colors mb-8"
           >
-            ← Back to home
+            <ArrowLeft size={15} /> Back to home
           </Link>
           <h1 className="text-3xl md:text-5xl font-bold gradient-text-blue mb-2 md:mb-4">All Projects</h1>
           <p className="text-sm md:text-base text-muted-foreground">

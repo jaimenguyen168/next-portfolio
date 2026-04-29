@@ -9,9 +9,13 @@ export default function ProjectsHeader() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const main = document.querySelector("main");
+    const target = main ?? window;
+    const getScrollTop = () =>
+      target instanceof Element ? target.scrollTop : window.scrollY;
+    const onScroll = () => setScrolled(getScrollTop() > 20);
+    target.addEventListener("scroll", onScroll, { passive: true });
+    return () => target.removeEventListener("scroll", onScroll);
   }, []);
 
   return (

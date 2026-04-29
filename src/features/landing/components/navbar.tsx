@@ -12,12 +12,14 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const scroller = document.querySelector("main") ?? window;
-    const getScrollTop = () =>
-      scroller instanceof Element ? scroller.scrollTop : window.scrollY;
-    const onScroll = () => setScrolled(getScrollTop() > 20);
-    scroller.addEventListener("scroll", onScroll, { passive: true });
-    return () => scroller.removeEventListener("scroll", onScroll);
+    const hero = document.querySelector("#hero");
+    if (!hero) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setScrolled(!entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    observer.observe(hero);
+    return () => observer.disconnect();
   }, []);
 
   return (
