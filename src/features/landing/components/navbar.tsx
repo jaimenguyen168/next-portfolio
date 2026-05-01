@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import ResumeButton from "@/features/shared/components/resume-button";
 
-const links = ["About", "Journey", "Skills", "Projects", "Contact"];
+const links = ["About", "Journey", "Values", "Skills", "Projects", "Contact"];
 
 // Scroll the snap container (<main>) to a section by id
 function scrollToSection(id: string) {
