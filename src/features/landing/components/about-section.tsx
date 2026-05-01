@@ -43,9 +43,9 @@ export default function AboutSection() {
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
           {/* Avatar */}
-          <div className="shrink-0 w-20 h-20 md:w-36 md:h-36 rounded-2xl overflow-hidden border border-white/10 shadow-lg shadow-indigo-500/10">
+          <div className="shrink-0 w-24 h-28 md:w-36 md:h-44 rounded-full overflow-hidden border border-white/10 shadow-lg shadow-indigo-500/10">
             <Image
-              src="/jaime.png"
+              src="/jaime-nguyen.jpg"
               alt="Jaime Nguyen"
               width={144}
               height={144}

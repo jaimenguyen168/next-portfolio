@@ -7,6 +7,7 @@ import HeroSection from "../components/hero-section";
 import type { Project } from "../components/projects-section";
 
 const AboutSection    = dynamic(() => import("../components/about-section"));
+const JourneySection  = dynamic(() => import("../components/journey-section"));
 const SkillsSection   = dynamic(() => import("../components/skills-section"));
 const ProjectsSection = dynamic(() => import("../components/projects-section"));
 const ContactSection  = dynamic(() => import("../components/contact-section"));
@@ -19,7 +20,7 @@ type Props = {
 
 export default function LandingView({ activeSkills, projects, resumeUrl }: Props) {
   useEffect(() => {
-    const sectionIds = ["hero", "about", "skills", "projects", "contact"];
+    const sectionIds = ["hero", "about", "journey", "skills", "projects", "contact"];
 
     const main = document.querySelector("main");
 
@@ -48,6 +49,7 @@ export default function LandingView({ activeSkills, projects, resumeUrl }: Props
       <main>
         <HeroSection />
         <AboutSection />
+        <JourneySection />
         <SkillsSection activeSkills={activeSkills} />
         <ProjectsSection projects={projects} />
         <ContactSection />
