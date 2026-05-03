@@ -25,17 +25,13 @@ export default function Navbar({ resumeUrl }: Props) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Blur when hero leaves viewport
+  // Show bg once user has scrolled down a bit
   useEffect(() => {
-    const hero = document.querySelector("#hero");
     const main = document.querySelector("main");
-    if (!hero) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setScrolled(!entry.isIntersecting),
-      { root: main, threshold: 0.1 }
-    );
-    observer.observe(hero);
-    return () => observer.disconnect();
+    if (!main) return;
+    const onScroll = () => setScrolled(main.scrollTop > 80);
+    main.addEventListener("scroll", onScroll, { passive: true });
+    return () => main.removeEventListener("scroll", onScroll);
   }, []);
 
   // On refresh, scroll <main> to whatever section is in the hash

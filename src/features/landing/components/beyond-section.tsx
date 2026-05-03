@@ -72,6 +72,8 @@ export default function BeyondSection({ beyondItems }: Props) {
   const [rocketState, setRocketState] = useState<RocketState>("offscreen");
   const [rocketPos, setRocketPos] = useState({ x: 20, y: 0 });
   const [recallPath, setRecallPath] = useState<{ x: number[]; y: number[] }>({ x: [0], y: [0] });
+  const [solarExpanded, setSolarExpanded] = useState(false);
+  const hasAnimatedIn = useRef(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -100,6 +102,10 @@ export default function BeyondSection({ beyondItems }: Props) {
           setRocketPos({ x: 20, y: size.h - 74 });
           setRocketState("offscreen");
           enterTimer = setTimeout(() => setRocketState("home"), 80);
+          if (!hasAnimatedIn.current) {
+            hasAnimatedIn.current = true;
+            setSolarExpanded(true);
+          }
         } else {
           setActive(null);
           setShowCard(false);
@@ -211,7 +217,7 @@ export default function BeyondSection({ beyondItems }: Props) {
         </p>
       </div>
 
-      <div ref={containerRef} className="relative w-full max-w-6xl h-full">
+      <div ref={containerRef} className="relative w-full max-w-6xl" style={{ height: "100vh" }}>
         <svg
           className="absolute inset-0 w-full h-full overflow-visible"
           width={size.w}
@@ -260,6 +266,14 @@ export default function BeyondSection({ beyondItems }: Props) {
               </feMerge>
             </filter>
           </defs>
+
+          {/* Solar system — expands from center on first scroll into view */}
+          <motion.g
+            style={{ transformOrigin: `${cx}px ${cy}px` }}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: solarExpanded ? 1 : 0, opacity: solarExpanded ? 1 : 0 }}
+            transition={{ duration: 1.4, ease: [0.34, 1.2, 0.64, 1] }}
+          >
 
           {/* Orbit rings — Pluto (last) has no ring */}
           {ORBITS.slice(0, VALUES.length).map((o, i) => {
@@ -382,6 +396,8 @@ export default function BeyondSection({ beyondItems }: Props) {
               </g>
             );
           })}
+
+          </motion.g>
 
           <LeoConstellation
             svgWidth={size.w}

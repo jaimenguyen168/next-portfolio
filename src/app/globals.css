@@ -63,8 +63,6 @@
   main {
     height: 100vh;
     overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    -webkit-scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
   }
@@ -83,11 +81,8 @@
   /* Layout */
   .section-full {
     @apply flex flex-col justify-center;
-    height: 100vh;
+    min-height: 100vh;
     min-height: -webkit-fill-available;
-    overflow: hidden;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
   }
 
   /* Dot grid */

@@ -2,7 +2,12 @@
 
 import { motion } from "framer-motion";
 
-export type RocketState = "offscreen" | "home" | "flying" | "landed" | "recalling";
+export type RocketState =
+  | "offscreen"
+  | "home"
+  | "flying"
+  | "landed"
+  | "recalling";
 
 type Props = {
   rocketState: RocketState;
@@ -38,25 +43,29 @@ export function BeyondRocket({
             x: { duration: 0.7, ease: "easeOut" },
             y: { duration: 2, repeat: Infinity, ease: "easeInOut" },
           };
-        if (rocketState === "flying") return { duration: 0.8, ease: "easeInOut" };
-        if (rocketState === "recalling") return { duration: 1.4, ease: "easeInOut" };
+        if (rocketState === "flying")
+          return { duration: 0.8, ease: "easeInOut" };
+        if (rocketState === "recalling")
+          return { duration: 1.4, ease: "easeInOut" };
         return { duration: 2, repeat: Infinity, ease: "easeInOut" };
       })()}
       onAnimationComplete={onAnimationComplete}
     >
       <motion.image
         href="/rocket.svg"
-        x={20}
-        y={sizeH - 110}
+        x={40}
+        y={sizeH - 180}
         animate={{
-          width:  rocketState === "home" || rocketState === "recalling" ? 80 : 36,
-          height: rocketState === "home" || rocketState === "recalling" ? 80 : 36,
+          width:
+            rocketState === "home" || rocketState === "recalling" ? 80 : 36,
+          height:
+            rocketState === "home" || rocketState === "recalling" ? 80 : 36,
         }}
         transition={{ duration: 0.8, ease: "easeInOut" }}
         style={{ filter: "drop-shadow(0 0 8px rgba(167,139,250,0.9))" }}
       />
       {rocketState === "home" && (
-        <foreignObject x={8} y={sizeH - 164} width={150} height={82}>
+        <foreignObject x={20} y={sizeH - 230} width={150} height={82}>
           <div
             className="relative rounded-[10px] px-2.5 py-1.5 text-[11px] text-white leading-[1.4]"
             style={{
@@ -66,14 +75,6 @@ export function BeyondRocket({
             }}
           >
             Let&apos;s travel to each planet to explore! 🚀
-            <div
-              className="absolute -bottom-[7px] left-[22px] w-0 h-0"
-              style={{
-                borderLeft: "6px solid transparent",
-                borderRight: "6px solid transparent",
-                borderTop: "7px solid rgba(20,16,50,0.92)",
-              }}
-            />
           </div>
         </foreignObject>
       )}

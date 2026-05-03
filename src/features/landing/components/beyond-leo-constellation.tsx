@@ -39,7 +39,7 @@ type Props = {
 
 export function LeoConstellation({ svgWidth, svgHeight, onClick }: Props) {
   const isMobile = svgWidth < 768;
-  const ox = isMobile ? svgWidth - 300 : svgWidth - 230;
+  const ox = svgWidth - 230;
   const oy = isMobile ? svgHeight - 250 : 120;
 
   const centerX = ox + 100;
@@ -63,8 +63,10 @@ export function LeoConstellation({ svgWidth, svgHeight, onClick }: Props) {
       {LEO_LINES.map(([a, b], i) => (
         <line
           key={i}
-          x1={sm[a].x} y1={sm[a].y}
-          x2={sm[b].x} y2={sm[b].y}
+          x1={sm[a].x}
+          y1={sm[a].y}
+          x2={sm[b].x}
+          y2={sm[b].y}
           stroke={NEON}
           strokeWidth="0.8"
           strokeOpacity="0.35"
