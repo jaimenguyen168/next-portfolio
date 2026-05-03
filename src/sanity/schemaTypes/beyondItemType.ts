@@ -9,8 +9,8 @@ export const beyondItemType = defineType({
       name: "order",
       title: "Order",
       type: "number",
-      description: "Order of this item (0-7). Used to sort items in the UI.",
-      validation: (Rule) => Rule.required().min(0).max(7),
+      description: "Order of this item (0-9). Used to sort items in the UI.",
+      validation: (Rule) => Rule.required().min(0).max(9),
     }),
     defineField({
       name: "label",
