@@ -6,11 +6,11 @@ import Navbar from "../components/navbar";
 import HeroSection from "../components/hero-section";
 import type { Project } from "../components/projects-section";
 
-const AboutSection    = dynamic(() => import("../components/about-section"));
-const ValuesSection   = dynamic(() => import("../components/beyond-section"));
-const SkillsSection   = dynamic(() => import("../components/skills-section"));
+const AboutSection = dynamic(() => import("../components/about-section"));
+const ValuesSection = dynamic(() => import("../components/beyond-section"));
+const SkillsSection = dynamic(() => import("../components/skills-section"));
 const ProjectsSection = dynamic(() => import("../components/projects-section"));
-const ContactSection  = dynamic(() => import("../components/contact-section"));
+const ContactSection = dynamic(() => import("../components/contact-section"));
 
 type BeyondItem = {
   _id: string;
@@ -29,9 +29,21 @@ type Props = {
   beyondItems?: BeyondItem[];
 };
 
-export default function LandingView({ activeSkills, projects, resumeUrl, beyondItems }: Props) {
+export default function LandingView({
+  activeSkills,
+  projects,
+  resumeUrl,
+  beyondItems,
+}: Props) {
   useEffect(() => {
-    const sectionIds = ["hero", "about", "beyond", "skills", "projects", "contact"];
+    const sectionIds = [
+      "hero",
+      "about",
+      "beyond",
+      "skills",
+      "projects",
+      "contact",
+    ];
 
     const main = document.querySelector("main");
 
@@ -45,7 +57,7 @@ export default function LandingView({ activeSkills, projects, resumeUrl, beyondI
             window.history.replaceState(null, "", hash);
           }
         },
-        { root: main, threshold: 0.1 }
+        { root: main, rootMargin: "-50% 0px -50% 0px", threshold: 0 },
       );
       obs.observe(el);
       return obs;
@@ -57,7 +69,7 @@ export default function LandingView({ activeSkills, projects, resumeUrl, beyondI
   return (
     <>
       <Navbar resumeUrl={resumeUrl} />
-      <main>
+      <main className="h-screen overflow-x-hidden">
         <HeroSection />
         <AboutSection />
         <ValuesSection beyondItems={beyondItems} />

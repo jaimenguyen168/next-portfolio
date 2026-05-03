@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 
 export type RocketState =
   | "offscreen"
+  | "entering"
   | "home"
   | "flying"
   | "landed"
@@ -13,6 +14,7 @@ type Props = {
   rocketState: RocketState;
   rocketPos: { x: number; y: number };
   recallPath: { x: number[]; y: number[] };
+  sizeW: number;
   sizeH: number;
   onAnimationComplete: () => void;
 };
@@ -21,6 +23,7 @@ export function BeyondRocket({
   rocketState,
   rocketPos,
   recallPath,
+  sizeW,
   sizeH,
   onAnimationComplete,
 }: Props) {
@@ -28,6 +31,8 @@ export function BeyondRocket({
     <motion.g
       animate={(() => {
         if (rocketState === "offscreen") return { x: -200, y: 0 };
+        if (rocketState === "entering")
+          return { x: [-60, -20, 0], y: [sizeH * 0.4, sizeH * 0.1, 0] };
         if (rocketState === "flying")
           return { x: rocketPos.x - 20, y: rocketPos.y - (sizeH - 74) };
         if (rocketState === "recalling")
@@ -38,6 +43,12 @@ export function BeyondRocket({
       })()}
       transition={(() => {
         if (rocketState === "offscreen") return { duration: 0 };
+        if (rocketState === "entering")
+          return {
+            duration: 1.6,
+            ease: [0.16, 1, 0.3, 1],
+            times: [0, 0.5, 1],
+          };
         if (rocketState === "home" && rocketPos.x === 20)
           return {
             x: { duration: 0.7, ease: "easeOut" },
@@ -57,9 +68,9 @@ export function BeyondRocket({
         y={sizeH - 180}
         animate={{
           width:
-            rocketState === "home" || rocketState === "recalling" ? 80 : 36,
+            rocketState === "home" || rocketState === "recalling" || rocketState === "entering" ? 80 : 36,
           height:
-            rocketState === "home" || rocketState === "recalling" ? 80 : 36,
+            rocketState === "home" || rocketState === "recalling" || rocketState === "entering" ? 80 : 36,
         }}
         transition={{ duration: 0.8, ease: "easeInOut" }}
         style={{ filter: "drop-shadow(0 0 8px rgba(167,139,250,0.9))" }}
