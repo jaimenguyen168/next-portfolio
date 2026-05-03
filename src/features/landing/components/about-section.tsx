@@ -100,6 +100,26 @@ export default function AboutSection() {
             </motion.div>
           ))}
         </div>
+
+        {/* Eagles */}
+        <motion.div
+          className="flex items-center justify-center gap-3 mt-6 md:mt-8"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
+        >
+          <Image
+            src="/eagles.svg"
+            alt="Philadelphia Eagles"
+            width={36}
+            height={36}
+            className="w-8 h-8 md:w-9 md:h-9"
+          />
+          <span className="text-base md:text-xl font-extrabold tracking-widest uppercase gradient-text-green">
+            Go Birds
+          </span>
+        </motion.div>
       </div>
     </section>
   );

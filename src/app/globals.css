@@ -111,6 +111,14 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+  .gradient-text-green {
+    background: linear-gradient(90deg, #4ade80, #86efac, #22c55e, #bbf7d0, #4ade80, #86efac, #22c55e);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 4s linear infinite;
+  }
 
   /* Buttons & backgrounds */
   .bg-purple-gradient {
