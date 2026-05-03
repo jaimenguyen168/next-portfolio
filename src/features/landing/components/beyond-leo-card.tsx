@@ -40,10 +40,17 @@ export function BeyondLeoCard({ visible, position, size, onClose }: Props) {
         const toRight = !isMobile && position.x + POPOVER_W + PAD + 20 < size.w;
 
         return (
+          <>
+          <div
+            key="leo-backdrop"
+            className="absolute inset-0 z-20"
+            onClick={onClose}
+          />
           <motion.div
             key="leo-card"
             className="absolute z-30"
             style={{ left: popLeft, top: popTop, width: popWidth }}
+            onClick={(e) => e.stopPropagation()}
             initial={{ opacity: 0, scale: 0.88, x: isMobile ? 0 : toRight ? -8 : 8 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             exit={{ opacity: 0, scale: 0.88 }}
@@ -199,6 +206,7 @@ export function BeyondLeoCard({ visible, position, size, onClose }: Props) {
               </div>
             </div>
           </motion.div>
+          </>
         );
       })()}
     </AnimatePresence>
