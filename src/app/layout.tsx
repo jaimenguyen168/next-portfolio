@@ -72,6 +72,9 @@ export const metadata: Metadata = {
       { url: "/logo.svg", media: "(prefers-color-scheme: dark)" },
     ],
   },
+  verification: {
+    google: "Q58f2PHllq1pisGi9mX0eYHeflP4KO3XyEZe1d9SkvI",
+  },
   robots: {
     index: true,
     follow: true,
