@@ -61,16 +61,16 @@ export default function TimelineView({ milestones }: Props) {
 
   if (!milestones.length) {
     return (
-      <main className="min-h-screen flex flex-col items-center justify-center px-4 text-center">
+      <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center">
         <p className="text-muted-foreground text-sm">
           No milestones yet — add some in Sanity Studio.
         </p>
-      </main>
+      </div>
     );
   }
 
   return (
-    <main className="min-h-screen overflow-x-hidden px-4 md:px-16 py-18 ">
+    <div className="min-h-screen overflow-x-hidden px-4 md:px-16 py-18">
       <section className="text-center mb-8">
         <motion.div
           ref={headerRef}
@@ -194,7 +194,7 @@ export default function TimelineView({ milestones }: Props) {
           </span>
         </motion.div>
       </section>
-    </main>
+    </div>
   );
 }
 

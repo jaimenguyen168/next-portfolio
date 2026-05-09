@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import Navbar from "../components/navbar";
 import HeroSection from "../components/hero-section";
+import SiteFooter from "@/features/shared/components/site-footer";
 import type { Project } from "../components/projects-section";
 
 const AboutSection = dynamic(() => import("../components/about-section"));
@@ -76,6 +77,7 @@ export default function LandingView({
         <SkillsSection activeSkills={activeSkills} />
         <ProjectsSection projects={projects} />
         <ContactSection />
+        <SiteFooter />
       </main>
     </>
   );

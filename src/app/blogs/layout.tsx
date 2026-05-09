@@ -3,7 +3,7 @@ import { RESUME_QUERY } from "@/sanity/queries/resumeQueries";
 import ProjectsHeader from "@/features/projects/components/projects-header";
 import SiteFooter from "@/features/shared/components/site-footer";
 
-export default async function TimelineLayout({ children }: { children: React.ReactNode }) {
+export default async function BlogsLayout({ children }: { children: React.ReactNode }) {
   const { data: resume } = await sanityFetch({ query: RESUME_QUERY });
 
   return (

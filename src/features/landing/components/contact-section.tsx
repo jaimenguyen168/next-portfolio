@@ -2,7 +2,13 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Code2Icon, Mail, Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import {
+  Mail,
+  Send,
+  CheckCircle2,
+  AlertCircle,
+  Loader2,
+} from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa";
 import { useState } from "react";
@@ -58,9 +64,11 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="section-full px-6 md:px-16 py-6 md:py-12 flex flex-col justify-between">
+    <section
+      id="contact"
+      className="section-full px-6 md:px-16 pt-6 md:pt-12 flex flex-col justify-between"
+    >
       <div className="max-w-5xl mx-auto w-full flex-1 flex flex-col justify-center">
-
         {/* Heading */}
         <motion.div
           className="text-center mb-6 md:mb-12"
@@ -69,14 +77,15 @@ export default function ContactSection() {
           viewport={{ once: false }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <h2 className="text-2xl md:text-5xl font-bold mb-1 md:mb-4 gradient-text-blue">Get In Touch</h2>
+          <h2 className="text-2xl md:text-5xl font-bold mb-1 md:mb-4 gradient-text-blue">
+            Get In Touch
+          </h2>
           <p className="text-xs md:text-base text-muted-foreground">
             Have a project in mind? Let&apos;s build something great together.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 items-start">
-
           {/* Left — form */}
           <motion.form
             onSubmit={handleSubmit}
@@ -87,7 +96,12 @@ export default function ContactSection() {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="contact-name" className="text-xs md:text-sm font-medium text-white">Name</label>
+              <label
+                htmlFor="contact-name"
+                className="text-xs md:text-sm font-medium text-white"
+              >
+                Name
+              </label>
               <input
                 id="contact-name"
                 type="text"
@@ -101,7 +115,12 @@ export default function ContactSection() {
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="contact-email" className="text-xs md:text-sm font-medium text-white">Email</label>
+              <label
+                htmlFor="contact-email"
+                className="text-xs md:text-sm font-medium text-white"
+              >
+                Email
+              </label>
               <input
                 id="contact-email"
                 type="email"
@@ -115,7 +134,12 @@ export default function ContactSection() {
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="contact-message" className="text-xs md:text-sm font-medium text-white">Message</label>
+              <label
+                htmlFor="contact-message"
+                className="text-xs md:text-sm font-medium text-white"
+              >
+                Message
+              </label>
               <textarea
                 id="contact-message"
                 rows={4}
@@ -152,7 +176,13 @@ export default function ContactSection() {
 
             <button
               type="submit"
-              disabled={status === "loading" || status === "success" || !name || !email || !message}
+              disabled={
+                status === "loading" ||
+                status === "success" ||
+                !name ||
+                !email ||
+                !message
+              }
               className="w-full flex items-center justify-center gap-2 py-2.5 md:py-3 rounded-lg font-medium text-white text-sm bg-purple-gradient hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {status === "loading" ? (
@@ -173,7 +203,6 @@ export default function ContactSection() {
 
           {/* Right */}
           <div className="flex flex-col gap-3 md:gap-4">
-
             {/* Title — desktop only */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
@@ -182,9 +211,12 @@ export default function ContactSection() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="hidden md:block"
             >
-              <h3 className="text-xl font-semibold text-white mb-2">Let&apos;s Connect</h3>
+              <h3 className="text-xl font-semibold text-white mb-2">
+                Let&apos;s Connect
+              </h3>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                Always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+                Always open to discussing new projects, creative ideas, or
+                opportunities to be part of your vision.
               </p>
             </motion.div>
 
@@ -238,10 +270,15 @@ export default function ContactSection() {
                   aria-label={`Visit my ${link.label} profile`}
                   className="flex items-center gap-4 px-4 py-3 rounded-lg bg-surface hover:bg-white/[0.07] transition-colors"
                 >
-                  <div aria-hidden="true" className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-icon-indigo text-accent-light">
+                  <div
+                    aria-hidden="true"
+                    className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-icon-indigo text-accent-light"
+                  >
                     {link.icon}
                   </div>
-                  <span className="text-sm font-medium text-white">{link.label}</span>
+                  <span className="text-sm font-medium text-white">
+                    {link.label}
+                  </span>
                 </Link>
               </motion.div>
             ))}
@@ -253,54 +290,17 @@ export default function ContactSection() {
               viewport={{ once: false }}
               transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
             >
-              <p className="text-sm font-medium mb-1 text-accent-light">Available for:</p>
-              <p className="text-sm text-muted-foreground">Full-time opportunities, Freelance projects & Collaborations</p>
+              <p className="text-sm font-medium mb-1 text-accent-light">
+                Available for:
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Full-time opportunities, Freelance projects & Collaborations
+              </p>
             </motion.div>
           </div>
         </div>
       </div>
 
-      {/* Footer */}
-      <motion.footer
-        className="pt-6 md:pt-8 w-full mt-6 md:mt-10"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-      >
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
-          <button
-            onClick={() => {
-              const main = document.querySelector("main");
-              const hero = document.querySelector("#hero");
-              if (main && hero) main.scrollTo({ top: (hero as HTMLElement).offsetTop, behavior: "smooth" });
-              window.history.replaceState(null, "", "/");
-            }}
-            aria-label="Back to top"
-            className="flex items-center gap-2 cursor-pointer"
-          >
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-gradient">
-              <Code2Icon size={16} className="text-white" />
-            </div>
-            <span className="text-white text-sm font-semibold">Jaime Nguyen</span>
-          </button>
-          <p className="text-xs text-muted-foreground text-center">
-            Built with{" "}
-            <span className="text-accent-light">Next.js</span>{" "}
-            &amp;{" "}
-            <span className="text-emerald-400">Sanity</span>
-          </p>
-          <Link
-            href="https://github.com/jaimenguyen168/NextJS-Portfolio"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View portfolio source code on GitHub"
-            className="flex items-center gap-2 text-xs text-muted-foreground hover:text-white transition-colors"
-          >
-            <SiGithub size={14} aria-hidden="true" /> Source code
-          </Link>
-        </div>
-      </motion.footer>
     </section>
   );
 }

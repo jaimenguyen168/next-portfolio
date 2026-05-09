@@ -27,9 +27,10 @@ This is a personal portfolio built with Next.js 16 and powered by Sanity as a li
 ## <a name="key-features">🔋 Key Features</a>
 
 - 👉 **Projects Showcase**: filterable gallery of projects with skill-based filtering and URL-synced state <br />
+- 👉 **Blog**: full-featured blog with category filters, featured posts, rich portable text body with inline images and code blocks, and per-post OG metadata <br />
 - 👉 **Milestone Timeline**: chronological career and personal milestones managed via Sanity, with category filters and animated alternating layout <br />
 - 👉 **AI Chat Assistant**: streaming chat widget powered by Groq, available across the site <br />
-- 👉 **Live CMS**: all content (projects, milestones, skills) managed through Sanity Studio at `/studio` <br />
+- 👉 **Live CMS**: all content (projects, blog posts, milestones, skills) managed through Sanity Studio at `/studio` <br />
 - 👉 **Contact Form**: email delivery via Resend <br />
 - 👉 **Animated UI**: smooth scroll-triggered and hover animations throughout using Framer Motion <br />
 - 👉 **SEO Optimized**: rich metadata, OpenGraph tags, and canonical URLs on every page <br />
