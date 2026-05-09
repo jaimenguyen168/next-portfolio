@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# jaime.dev
+<img width="1200" height="600" alt="jaime.dev" src="/jaimedev.png" />
+<br />
+<div align="center">
+  <img src="https://img.shields.io/badge/-Next.js-black?style=for-the-badge&logoColor=white&logo=nextdotjs&color=000000" alt="Next.js" />
+  <img src="https://img.shields.io/badge/-TypeScript-black?style=for-the-badge&logoColor=white&logo=typescript&color=3178C6" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/-Tailwind_CSS-black?style=for-the-badge&logoColor=white&logo=tailwindcss&color=06B6D4" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/-React-black?style=for-the-badge&logoColor=white&logo=react&color=61DAFB" alt="React" />
+  <img src="https://img.shields.io/badge/-Sanity-black?style=for-the-badge&logoColor=white&logo=sanity&color=111111" alt="Sanity" />
+  <img src="https://img.shields.io/badge/-Framer_Motion-black?style=for-the-badge&logoColor=white&logo=framer&color=0055FF" alt="Framer Motion" />
+  <img src="https://img.shields.io/badge/-Groq-black?style=for-the-badge&logoColor=white&logo=groq&color=F55036" alt="Groq" />
+  <img src="https://img.shields.io/badge/-Resend-black?style=for-the-badge&logoColor=white&logo=resend&color=000000" alt="Resend" />
+</div>
 
-## Getting Started
+## 📋 <a name="table-of-contents">Table of Contents</a>
 
-First, run the development server:
+1. 📋 [Project Overview](#project-overview)
+2. 🔋 [Key Features](#key-features)
+3. 📌 [Getting Started](#getting-started)
+
+---
+
+## <a name="project-overview">📋 Project Overview</a>
+
+jaime.dev is a personal portfolio built with Next.js 16 and powered by Sanity as a live CMS. It showcases projects, a career and personal milestone timeline, and an AI-powered chat assistant — all in a dark, animated interface designed to reflect my work as a frontend and full-stack developer.
+
+## <a name="key-features">🔋 Key Features</a>
+
+- 👉 **Projects Showcase**: filterable gallery of projects with skill-based filtering and URL-synced state <br />
+- 👉 **Milestone Timeline**: chronological career and personal milestones managed via Sanity, with category filters and animated alternating layout <br />
+- 👉 **AI Chat Assistant**: streaming chat widget powered by Groq, available across the site <br />
+- 👉 **Live CMS**: all content (projects, milestones, skills) managed through Sanity Studio at `/studio` <br />
+- 👉 **Contact Form**: email delivery via Resend <br />
+- 👉 **Animated UI**: smooth scroll-triggered and hover animations throughout using Framer Motion <br />
+- 👉 **SEO Optimized**: rich metadata, OpenGraph tags, and canonical URLs on every page <br />
+
+---
+
+## <a name="getting-started">📌 Getting Started</a>
+
+### Installation
+
+**Clone the repository**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/jaimenguyen168/NextJS-Portfolio.git
+cd NextJS-Portfolio
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Install dependencies**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Environment Variables
 
-## Learn More
+Create a `.env.local` file in the root of the project and add the following:
 
-To learn more about Next.js, take a look at the following resources:
+```env
+# Sanity
+NEXT_PUBLIC_SANITY_PROJECT_ID=
+NEXT_PUBLIC_SANITY_DATASET=
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Resend
+RESEND_API_KEY=
+CONTACT_EMAIL=
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Groq
+GROQ_API_KEY=
+```
 
-## Deploy on Vercel
+**Run the development server**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+pnpm dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Open Sanity Studio**
+
+Navigate to `http://localhost:3000/studio` to manage content.
