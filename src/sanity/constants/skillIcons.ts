@@ -115,6 +115,9 @@ import {
   SiAnthropic,
   SiLangchain,
   SiHuggingface,
+  SiGooglegemini,
+  SiOllama,
+  SiRevenuecat,
   SiStripe,
   SiSwagger,
   SiJest,
@@ -229,6 +232,7 @@ export const SKILL_ICONS: Record<string, IconType> = {
 
   react_native: SiReactNative, // Same icon as React
   expo: SiExpo,
+  nativewind: SiTailwindcss, // NativeWind = Tailwind for React Native
   flutter: SiFlutter,
   swift: SiSwift,
   swiftui: SiSwift,
@@ -260,6 +264,7 @@ export const SKILL_ICONS: Record<string, IconType> = {
 
   // Databases
   postgresql: SiPostgresql,
+  neon: SiPostgresql, // Neon is serverless Postgres
   mysql: SiMysql,
   sqlite: SiSqlite,
   mongodb: SiMongodb,
@@ -330,7 +335,13 @@ export const SKILL_ICONS: Record<string, IconType> = {
   anthropic_api: SiAnthropic,
   langchain: SiLangchain,
   hugging_face: SiHuggingface,
+  gemini_api: SiGooglegemini,
+  groq_api: FaBolt, // No Groq icon
+  ollama: SiOllama,
+  deepseek_api: FaCode, // No DeepSeek icon
   stripe: SiStripe,
+  polar: FaCode, // No Polar icon
+  revenuecat: SiRevenuecat,
   swagger: SiSwagger,
 
   // Testing

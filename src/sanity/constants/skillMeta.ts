@@ -24,7 +24,7 @@ import {
   SiGooglecloud, SiDocker, SiKubernetes,
   SiGithubactions, SiCircleci, SiTerraform, SiNginx, SiLinux,
   SiSanity, SiContentful, SiStrapi, SiPayloadcms, SiDirectus, SiWordpress,
-  SiOpenai, SiAnthropic, SiLangchain, SiHuggingface, SiStripe, SiSwagger,
+  SiOpenai, SiAnthropic, SiLangchain, SiHuggingface, SiGooglegemini, SiOllama, SiRevenuecat, SiStripe, SiSwagger,
   SiJest, SiVitest, SiCypress, SiTestinglibrary, SiStorybook,
   SiEslint, SiPrettier, SiZod, SiNx, SiFigma, SiElectron, SiTauri,
 } from "react-icons/si";
@@ -121,6 +121,7 @@ export const SKILL_META: Record<string, SkillMeta> = {
   // ─── Mobile ─────────────────────────────────────────────────────────────────
   react_native:       { icon: SiReact,            label: "React Native",     color: "#61dafb" },
   expo:               { icon: SiExpo,             label: "Expo",             color: "#f59e0b" },
+  nativewind:         { icon: SiTailwindcss,      label: "NativeWind",       color: "#38bdf8" },
   flutter:            { icon: SiFlutter,          label: "Flutter",          color: "#54c5f8" },
   swift:              { icon: SiSwift,            label: "Swift",            color: "#f05138" },
   swiftui:            { icon: SiSwift,            label: "SwiftUI",          color: "#f05138" },
@@ -151,6 +152,7 @@ export const SKILL_META: Record<string, SkillMeta> = {
   // ─── Backend & Database — Databases ─────────────────────────────────────────
   convex:             { icon: FaBolt,             label: "Convex",           color: "#f5a623" },
   postgresql:         { icon: SiPostgresql,       label: "PostgreSQL",       color: "#336791" },
+  neon:               { icon: SiPostgresql,       label: "Neon",             color: "#00e5bf" },
   mysql:              { icon: SiMysql,            label: "MySQL",            color: "#4479a1" },
   sqlite:             { icon: SiSqlite,           label: "SQLite",           color: "#003b57" },
   mongodb:            { icon: SiMongodb,          label: "MongoDB",          color: "#4db33d" },
@@ -221,7 +223,13 @@ export const SKILL_META: Record<string, SkillMeta> = {
   anthropic_api:      { icon: SiAnthropic,        label: "Anthropic",        color: "#d97757" },
   langchain:          { icon: SiLangchain,        label: "LangChain",        color: "#ffffff" },
   hugging_face:       { icon: SiHuggingface,      label: "Hugging Face",     color: "#ff9d00" },
+  gemini_api:         { icon: SiGooglegemini,     label: "Gemini",           color: "#4285f4" },
+  groq_api:           { icon: FaBolt,             label: "Groq",             color: "#f55036" },
+  ollama:             { icon: SiOllama,           label: "Ollama",           color: "#ffffff" },
+  deepseek_api:       { icon: FaCode,             label: "DeepSeek",         color: "#4d6bfe" },
   stripe:             { icon: SiStripe,           label: "Stripe",           color: "#635bff" },
+  polar:              { icon: FaCode,             label: "Polar",            color: "#3451b2" },
+  revenuecat:         { icon: SiRevenuecat,       label: "RevenueCat",       color: "#f25a5a" },
   swagger:            { icon: SiSwagger,          label: "Swagger",          color: "#85ea2d" },
 
   // ─── Auth & Tools — Testing ──────────────────────────────────────────────────
