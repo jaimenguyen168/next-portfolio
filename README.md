@@ -1,5 +1,3 @@
-# jaime.dev
-
 <img width="1536" height="1024" alt="jaimedev" src="https://github.com/user-attachments/assets/9e5fd04d-54b4-4867-9315-801b34ea7a14" />
 
 <br />
