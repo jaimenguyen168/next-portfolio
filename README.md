@@ -1,5 +1,7 @@
 # jaime.dev
-<img width="1200" height="600" alt="jaime.dev" src="/jaimedev.png" />
+
+<img width="1536" height="1024" alt="jaimedev" src="https://github.com/user-attachments/assets/9e5fd04d-54b4-4867-9315-801b34ea7a14" />
+
 <br />
 <div align="center">
   <img src="https://img.shields.io/badge/-Next.js-black?style=for-the-badge&logoColor=white&logo=nextdotjs&color=000000" alt="Next.js" />
