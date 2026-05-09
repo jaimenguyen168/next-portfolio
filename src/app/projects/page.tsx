@@ -6,15 +6,32 @@ import ProjectsView from "@/features/projects/views/projects-view";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "A full showcase of projects by Jaime Nguyen — web apps, mobile experiences, and everything in between, built with Next.js, React Native, Expo, and SwiftUI.",
+    "A full showcase of projects by Jaime Nguyen — from Clover, a VS Code extension built as a Temple University capstone, to PersuAI, an antagonistic AI for argument training. Web apps, mobile experiences, and everything in between.",
   alternates: {
     canonical: "/projects",
   },
+  keywords: [
+    "Jaime Nguyen projects",
+    "Clover developer",
+    "Clover VS Code extension",
+    "antagonistic AI",
+    "PersuAI",
+    "Temple University capstone",
+    "HCI research",
+    "Next.js projects",
+    "React Native",
+    "Expo",
+    "SwiftUI",
+    "frontend developer portfolio",
+    "full stack projects",
+    "TypeScript",
+    "mobile app developer",
+  ],
   openGraph: {
     url: "/projects",
     title: "Projects | Jaime Nguyen",
     description:
-      "A full showcase of projects by Jaime Nguyen — web apps, mobile experiences, and everything in between.",
+      "From Clover (a VS Code extension capstone) to PersuAI (antagonistic AI for argument training) — a full showcase of Jaime Nguyen's web, mobile, and research projects.",
   },
 };
 

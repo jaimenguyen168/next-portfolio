@@ -1,8 +1,9 @@
 "use client";
 
-import { Palette, Scale, Wrench, Layers } from "lucide-react";
+import { Palette, Scale, Wrench, Layers, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 const features = [
   {
@@ -60,12 +61,24 @@ export default function AboutSection() {
             <h2 className="text-2xl md:text-5xl font-bold mb-2 md:mb-4 gradient-text-blue">
               About Me
             </h2>
-            <p className="text-xs md:text-base max-w-2xl leading-relaxed text-muted-foreground">
+            <p className="text-xs md:text-base max-w-2xl leading-relaxed text-muted-foreground mb-3">
               Frontend and mobile developer focused on building polished,
               production-ready products. I work across web and mobile, from
               Next.js apps to React Native and SwiftUI experiences, always
               reaching for the right tool to get things done properly.
             </p>
+            <div className="flex flex-wrap items-center gap-2 justify-center md:justify-start">
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-medium px-3 py-1 rounded-full border border-purple-500/25 bg-purple-500/10 text-purple-300/80">
+                🎓 B.S. Computer Science · Temple University
+              </span>
+              <Link
+                href="/timeline"
+                className="group inline-flex items-center gap-1.5 text-[11px] font-medium px-3 py-1 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300 text-muted-foreground hover:text-white"
+              >
+                <span>See my journey</span>
+                <ArrowRight size={11} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+              </Link>
+            </div>
           </div>
         </motion.div>
 

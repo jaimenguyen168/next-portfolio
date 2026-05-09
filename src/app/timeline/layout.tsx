@@ -1,0 +1,14 @@
+import { sanityFetch } from "@/sanity/lib/live";
+import { RESUME_QUERY } from "@/sanity/queries/resumeQueries";
+import ProjectsHeader from "@/features/projects/components/projects-header";
+
+export default async function TimelineLayout({ children }: { children: React.ReactNode }) {
+  const { data: resume } = await sanityFetch({ query: RESUME_QUERY });
+
+  return (
+    <>
+      <ProjectsHeader resumeUrl={resume?.url ?? null} />
+      <main className="pt-12">{children}</main>
+    </>
+  );
+}
