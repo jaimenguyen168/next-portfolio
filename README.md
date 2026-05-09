@@ -24,7 +24,7 @@
 
 ## <a name="project-overview">📋 Project Overview</a>
 
-jaime.dev is a personal portfolio built with Next.js 16 and powered by Sanity as a live CMS. It showcases projects, a career and personal milestone timeline, and an AI-powered chat assistant — all in a dark, animated interface designed to reflect my work as a frontend and full-stack developer.
+This is a personal portfolio built with Next.js 16 and powered by Sanity as a live CMS. It showcases projects, a career and personal milestone timeline, and an AI-powered chat assistant — all in a dark, animated interface designed to reflect my work as a frontend and full-stack developer.
 
 ## <a name="key-features">🔋 Key Features</a>
 
