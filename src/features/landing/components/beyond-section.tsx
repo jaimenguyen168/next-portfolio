@@ -433,6 +433,25 @@ export default function BeyondSection({ beyondItems }: Props) {
                   >
                     {value.label}
                   </text>
+                  {value.marks.length > 0 &&
+                    (() => {
+                      const badgeY = by - pr - 8;
+                      return (
+                        <g style={{ pointerEvents: "none" }}>
+                          <text
+                            x={bx}
+                            y={badgeY + 6}
+                            textAnchor="middle"
+                            fontSize="10"
+                            fill={value.accentColor}
+                            fontWeight="700"
+                            style={{ pointerEvents: "none" }}
+                          >
+                            {`🚩 ${value.marks.length}`}
+                          </text>
+                        </g>
+                      );
+                    })()}
                 </g>
               );
             })}

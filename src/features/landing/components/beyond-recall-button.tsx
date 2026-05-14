@@ -1,6 +1,5 @@
-"use client";
-
 import { motion, AnimatePresence } from "framer-motion";
+import { Loader2Icon, RocketIcon } from "lucide-react";
 
 type Props = {
   visible: boolean;
@@ -25,16 +24,8 @@ export function BeyondRecallButton({ visible, onRecall }: Props) {
             boxShadow: "0 0 18px rgba(167,139,250,0.25)",
           }}
         >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path
-              d="M13.5 8A5.5 5.5 0 1 1 8 2.5"
-              stroke="#c4b5fd"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-            />
-            <path d="M8 2.5 L10.5 0.5 L10.5 4.5 Z" fill="#c4b5fd" />
-          </svg>
-          Recall
+          <Loader2Icon size={14} />
+          Recall <RocketIcon size={14} />
         </motion.button>
       )}
     </AnimatePresence>
