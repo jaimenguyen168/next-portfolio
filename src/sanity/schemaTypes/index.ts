@@ -5,7 +5,8 @@ import { resumeType } from './resumeType'
 import { beyondItemType } from './beyondItemType'
 import { milestoneType } from './milestoneType'
 import { blogType } from './blogType'
+import { planetMarkType } from './planetMarkType'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [skillType, projectType, resumeType, beyondItemType, milestoneType, blogType],
+  types: [skillType, projectType, resumeType, beyondItemType, milestoneType, blogType, planetMarkType],
 }

@@ -12,6 +12,7 @@ import {
   ACCENT_COLORS,
   ACCENT_BG,
   type ValueDef,
+  type PlanetMark,
 } from "../constants/beyondDefaults";
 
 const TILT = 28;
@@ -41,6 +42,7 @@ type BeyondItem = {
   body: string;
   images?: Array<{ asset?: { url: string }; hotspot?: unknown }>;
   imageTags?: string[];
+  marks?: PlanetMark[];
 };
 
 type Props = {
@@ -58,6 +60,7 @@ export default function BeyondSection({ beyondItems }: Props) {
       .filter(Boolean) as string[],
     accentColor: ACCENT_COLORS[i % ACCENT_COLORS.length],
     accentBg: ACCENT_BG[i % ACCENT_BG.length],
+    marks: (item.marks ?? []) as PlanetMark[],
   }));
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -72,7 +75,6 @@ export default function BeyondSection({ beyondItems }: Props) {
     y: number;
   } | null>(null);
   const [showCard, setShowCard] = useState(false);
-  const [leoTarget, setLeoTarget] = useState({ x: 0, y: 0 });
   const [showLeoCard, setShowLeoCard] = useState(false);
   const [isLeoFlight, setIsLeoFlight] = useState(false);
   const [rocketState, setRocketState] = useState<RocketState>("offscreen");
@@ -210,7 +212,6 @@ export default function BeyondSection({ beyondItems }: Props) {
     setShowCard(false);
     setShowLeoCard(false);
     setIsLeoFlight(true);
-    setLeoTarget({ x: cx, y: cy });
     setRocketState("flying");
     setRocketPos({ x: cx - ROCKET_W / 2, y: cy - ROCKET_H / 2 });
   };
@@ -461,8 +462,6 @@ export default function BeyondSection({ beyondItems }: Props) {
 
       <BeyondLeoCard
         visible={showLeoCard}
-        position={leoTarget}
-        size={size}
         onClose={() => {
           setShowLeoCard(false);
           setRocketState("landed");

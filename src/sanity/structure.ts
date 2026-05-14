@@ -19,4 +19,6 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem("beyondItem").title("Beyond the Code"),
       S.documentTypeListItem("milestone").title("Milestones"),
       S.documentTypeListItem("blog").title("Blog Posts"),
+      S.divider(),
+      S.documentTypeListItem("planetMark").title("Planet Marks ✍️"),
     ]);
