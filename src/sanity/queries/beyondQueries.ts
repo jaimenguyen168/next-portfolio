@@ -7,5 +7,13 @@ export const BEYOND_ITEMS_QUERY = `
     body,
     "images": images[]{ asset->{ url }, hotspot },
     imageTags,
+    "marks": *[_type == "planetMark" && planet._ref == ^._id] | order(submittedAt desc) {
+      _id,
+      emoji,
+      nickname,
+      mark,
+      "imageUrl": image.asset->url,
+      submittedAt
+    }
   }
 `;
