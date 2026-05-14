@@ -73,7 +73,7 @@ export function BeyondPlanetCard({
           {/* Image header */}
           <div
             className="relative shrink-0 overflow-hidden rounded-t-xl"
-            style={{ height: 190, background: active?.value?.accentBg }}
+            style={{ height: 300, background: active?.value?.accentBg }}
           >
             {active?.value?.images && active.value.images.length > 0 ? (
               active.value.images.length === 1 ? (
