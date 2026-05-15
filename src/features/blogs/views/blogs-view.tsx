@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { ArrowLeft, Calendar, Clock, Tag, X } from "lucide-react";
+import posthog from "posthog-js";
 
 export type Blog = {
   _id: string;
@@ -183,7 +184,7 @@ function FeaturedBlogCard({ blog, index }: { blog: Blog; index: number }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.06, ease: "easeOut" }}
     >
-      <Link href={`/blogs/${blog.slug}`} className="group block">
+      <Link href={`/blogs/${blog.slug}`} className="group block" onClick={() => posthog.capture("blog_post_clicked", { slug: blog.slug, title: blog.title, category: blog.category, featured: true })}>
         <div
           className="relative rounded-2xl overflow-hidden border transition-all duration-300 group-hover:border-white/20"
           style={{ borderColor: `${color}30`, background: "rgba(255,255,255,0.02)" }}
@@ -249,7 +250,7 @@ function BlogCard({ blog, index }: { blog: Blog; index: number }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, delay: index * 0.06, ease: "easeOut" }}
     >
-      <Link href={`/blogs/${blog.slug}`} className="group block h-full">
+      <Link href={`/blogs/${blog.slug}`} className="group block h-full" onClick={() => posthog.capture("blog_post_clicked", { slug: blog.slug, title: blog.title, category: blog.category, featured: false })}>
         <div
           className="h-full flex flex-col rounded-xl overflow-hidden border transition-all duration-300 group-hover:border-white/20 group-hover:-translate-y-0.5"
           style={{ borderColor: `${color}25`, background: "rgba(255,255,255,0.02)" }}

@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { type PlanetMark } from "../constants/beyondDefaults";
+import posthog from "posthog-js";
 
 const EMOJIS = [
   "👋",
@@ -103,6 +104,12 @@ export function AddMarkDialog({
       if (imageFile) fd.append("image", imageFile);
       const res = await fetch("/api/planet-mark", { method: "POST", body: fd });
       if (!res.ok) throw new Error("Failed");
+      posthog.capture("planet_mark_submitted", {
+        planet_id: planetId,
+        has_nickname: !!nickname.trim(),
+        has_image: !!imageFile,
+        mark_length: mark.trim().length,
+      });
       onPosted({
         _id: `temp-${Date.now()}`,
         emoji,

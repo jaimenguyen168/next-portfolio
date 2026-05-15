@@ -6,6 +6,7 @@ import { X, Send, User, Loader2, Sparkles } from "lucide-react";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import posthog from "posthog-js";
 
 const LINK_CLASS =
   "inline-flex items-center gap-1 mx-0.5 px-2 py-0.5 rounded-md bg-accent/20 border border-accent-light/30 text-accent-light hover:bg-accent/40 hover:border-accent-light/60 transition-colors text-xs font-medium cursor-pointer";
@@ -237,7 +238,10 @@ export default function ChatWidget() {
                   ].map((q) => (
                     <button
                       key={q}
-                      onClick={() => send(q)}
+                      onClick={() => {
+                        posthog.capture("chat_quick_prompt_clicked", { prompt: q });
+                        send(q);
+                      }}
                       disabled={isLoading}
                       className="text-xs px-3 py-1.5 rounded-full border border-white/15 text-slate-400 hover:border-accent-light/50 hover:text-accent-light transition-colors disabled:opacity-40"
                     >
@@ -336,7 +340,12 @@ export default function ChatWidget() {
 
             {/* Input */}
             <form
-              onSubmit={handleSubmit}
+              onSubmit={(e) => {
+                if (input.trim()) {
+                  posthog.capture("chat_message_sent", { message_length: input.trim().length });
+                }
+                handleSubmit(e);
+              }}
               className="flex items-center gap-2 px-3 py-3 bg-[#0b1230] border-t border-white/8"
             >
               <input
@@ -372,7 +381,11 @@ export default function ChatWidget() {
 
       {/* Floating toggle button */}
       <motion.button
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => {
+          const next = !open;
+          setOpen(next);
+          if (next) posthog.capture("chat_opened");
+        }}
         aria-label={open ? "Close chat" : "Chat with Jaime.ai"}
         aria-expanded={open}
         className="fixed bottom-5 right-4 md:right-6 z-50 w-11 h-11 rounded-xl bg-purple-gradient text-white flex items-center justify-center cursor-pointer"

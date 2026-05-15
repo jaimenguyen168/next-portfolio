@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { getPostHogClient } from "@/lib/posthog-server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const MY_EMAIL = process.env.CONTACT_EMAIL ?? "jaimenguyen168@gmail.com";
@@ -286,6 +287,18 @@ export async function POST(request: Request) {
       console.error("Resend errors:", { admin: adminResult.error, confirm: confirmResult.error });
       return NextResponse.json({ error: "Failed to send emails" }, { status: 500 });
     }
+
+    const posthog = getPostHogClient();
+    posthog.capture({
+      distinctId: email,
+      event: "contact_form_submitted_server",
+      properties: {
+        sender_name: name,
+        sender_email: email,
+        message_length: message.length,
+      },
+    });
+    await posthog.shutdown();
 
     return NextResponse.json({ success: true });
   } catch (error) {

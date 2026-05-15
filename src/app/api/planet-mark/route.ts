@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { writeClient } from "@/sanity/lib/writeClient";
+import { getPostHogClient } from "@/lib/posthog-server";
 
 export async function POST(req: NextRequest) {
   try {
@@ -43,6 +44,20 @@ export async function POST(req: NextRequest) {
     };
 
     const created = await writeClient.create(doc);
+
+    const posthog = getPostHogClient();
+    posthog.capture({
+      distinctId: nickname?.trim() || "anonymous",
+      event: "planet_mark_submitted_server",
+      properties: {
+        planet_id: planetId,
+        has_nickname: !!(nickname?.trim()),
+        has_image: !!(imageFile && imageFile.size > 0),
+        mark_length: mark.trim().length,
+      },
+    });
+    await posthog.shutdown();
+
     return NextResponse.json({ mark: created }, { status: 201 });
   } catch (err) {
     console.error("Failed to submit mark:", err);

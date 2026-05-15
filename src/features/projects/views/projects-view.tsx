@@ -7,6 +7,7 @@ import { useMemo, useState, useEffect } from "react";
 import { ArrowLeft, X } from "lucide-react";
 import ProjectCard, { type Project } from "@/features/projects/components/project-card";
 import { SKILL_META } from "@/sanity/constants/skillMeta";
+import posthog from "posthog-js";
 
 export type { Project };
 
@@ -117,7 +118,15 @@ export default function ProjectsView({ projects, initialSkills }: Props) {
                 return (
                   <motion.button
                     key={value}
-                    onClick={() => toggleSkill(value)}
+                    onClick={() => {
+                      const isCurrentlyActive = activeSkills.has(value);
+                      posthog.capture("project_filter_applied", {
+                        skill: value,
+                        skill_label: label,
+                        action: isCurrentlyActive ? "removed" : "added",
+                      });
+                      toggleSkill(value);
+                    }}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ duration: 0.12 }}
