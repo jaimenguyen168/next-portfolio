@@ -7,6 +7,7 @@ import { SiNextdotjs, SiReact, SiExpo, SiSwift, SiClerk, SiOpenai, SiTailwindcss
 import { Zap } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import posthog from "posthog-js";
 
 type TechIcon = { icon: React.ElementType; color: string; label: string };
 
@@ -162,6 +163,7 @@ export default function HeroSection() {
           <Link
             href="#projects"
             aria-label="View my projects"
+            onClick={() => posthog.capture("hero_view_projects_clicked")}
             className="px-7 py-3 rounded-lg font-semibold text-white text-sm bg-purple-gradient hover:opacity-90 transition-opacity"
           >
             View Projects
@@ -169,6 +171,7 @@ export default function HeroSection() {
           <Link
             href="#contact"
             aria-label="Get in touch with me"
+            onClick={() => posthog.capture("hero_get_in_touch_clicked")}
             className="px-7 py-3 rounded-lg font-semibold text-sm border border-white/20 text-slate-300 hover:border-white/40 transition-colors"
           >
             Get In Touch

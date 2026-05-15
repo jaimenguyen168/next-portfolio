@@ -1,9 +1,11 @@
 "use client";
 
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
+import posthog from "posthog-js";
 
 const CATEGORY_META: Record<string, { label: string; color: string }> = {
   engineering: { label: "Engineering", color: "#818cf8" },
@@ -63,6 +65,10 @@ type Props = { blog: BlogDetail };
 export default function BlogDetailView({ blog }: Props) {
   const meta = CATEGORY_META[blog.category];
   const color = meta?.color ?? "#818cf8";
+
+  useEffect(() => {
+    posthog.capture("blog_post_viewed", { slug: blog.slug, title: blog.title, category: blog.category });
+  }, [blog.slug, blog.title, blog.category]);
 
   return (
     <div className="min-h-screen px-4 md:px-16 py-18">

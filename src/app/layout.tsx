@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Suspense } from "react";
 import { SanityLive } from "@/sanity/lib/live";
 import ChatWidgetLoader from "@/features/chat/components/chat-widget-loader";
+import { PageViewTracker } from "@/components/page-view-tracker";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-geist-sans",
@@ -99,10 +101,13 @@ export default function RootLayout({
       className={`${plusJakartaSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-          {children}
-          <SanityLive />
-          <ChatWidgetLoader />
-        </body>
+        <Suspense>
+          <PageViewTracker />
+        </Suspense>
+        {children}
+        <SanityLive />
+        <ChatWidgetLoader />
+      </body>
     </html>
   );
 }

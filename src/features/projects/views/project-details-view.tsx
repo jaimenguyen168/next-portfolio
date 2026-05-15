@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
 import { SKILL_META } from "@/sanity/constants/skillMeta";
+import posthog from "posthog-js";
 
 type SanityImage = {
   _type: "image";
@@ -160,6 +161,7 @@ export default function ProjectDetailsView({ project }: Props) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`View source code for ${project.title} on GitHub`}
+              onClick={() => posthog.capture("project_github_clicked", { project_title: project.title, project_slug: project.slug })}
               className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium border border-white/15 text-slate-200 hover:bg-white/5 transition-colors"
             >
               <Code2 size={16} aria-hidden="true" /> View Code
@@ -180,6 +182,7 @@ export default function ProjectDetailsView({ project }: Props) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`View live demo for ${project.title}`}
+              onClick={() => posthog.capture("project_demo_clicked", { project_title: project.title, project_slug: project.slug })}
               className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium text-white bg-purple-gradient hover:opacity-90 transition-opacity"
             >
               <ExternalLink size={16} aria-hidden="true" /> Live Demo

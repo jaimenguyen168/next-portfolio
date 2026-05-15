@@ -12,6 +12,7 @@ import {
 import { SiGithub } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa";
 import { useState } from "react";
+import posthog from "posthog-js";
 
 const socialLinks = [
   {
@@ -55,11 +56,15 @@ export default function ContactSection() {
       if (!res.ok) throw new Error("Failed");
 
       setStatus("success");
+      posthog.capture("contact_form_submitted", {
+        has_message: true,
+      });
       setName("");
       setEmail("");
       setMessage("");
     } catch {
       setStatus("error");
+      posthog.capture("contact_form_failed");
     }
   };
 
@@ -246,6 +251,7 @@ export default function ContactSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Visit my ${link.label} profile`}
+                  onClick={() => posthog.capture("social_link_clicked", { platform: link.label })}
                   className="w-10 h-10 rounded-lg flex items-center justify-center bg-surface hover:bg-white/[0.07] transition-colors text-accent-light"
                 >
                   <span aria-hidden="true">{link.icon}</span>
@@ -268,6 +274,7 @@ export default function ContactSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Visit my ${link.label} profile`}
+                  onClick={() => posthog.capture("social_link_clicked", { platform: link.label })}
                   className="flex items-center gap-4 px-4 py-3 rounded-lg bg-surface hover:bg-white/[0.07] transition-colors"
                 >
                   <div

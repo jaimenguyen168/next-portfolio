@@ -1,6 +1,7 @@
 "use client";
 
 import { Download } from "lucide-react";
+import posthog from "posthog-js";
 
 type Props = {
   resumeUrl: string | null;
@@ -13,7 +14,10 @@ export default function ResumeButton({ resumeUrl, className, onAfterClick }: Pro
     <button
       onClick={() => {
         onAfterClick?.();
-        if (resumeUrl) window.open(resumeUrl, "_blank");
+        if (resumeUrl) {
+          posthog.capture("resume_downloaded");
+          window.open(resumeUrl, "_blank");
+        }
       }}
       disabled={!resumeUrl}
       className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white bg-purple-gradient hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed ${className ?? ""}`}
