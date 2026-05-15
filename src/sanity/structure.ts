@@ -1,10 +1,19 @@
 import type { StructureResolver } from "sanity/structure";
+import { QuickDeleteList } from "./components/quick-delete-list";
+
+function listPane(S: Parameters<StructureResolver>[0], schemaType: string, title: string, orderField?: string) {
+  return S.listItem()
+    .title(title)
+    .child(
+      S.component(() => QuickDeleteList({ schemaType, orderField }))
+        .title(title)
+    );
+}
 
 export const structure: StructureResolver = (S) =>
   S.list()
     .title("Content")
     .items([
-      // Singleton — only one resume document ever exists
       S.listItem()
         .title("Resume")
         .id("resume")
@@ -14,11 +23,11 @@ export const structure: StructureResolver = (S) =>
             .documentId("resume")
         ),
       S.divider(),
-      S.documentTypeListItem("project").title("Projects"),
-      S.documentTypeListItem("skill").title("Skills"),
-      S.documentTypeListItem("beyondItem").title("Beyond the Code"),
-      S.documentTypeListItem("milestone").title("Milestones"),
-      S.documentTypeListItem("blog").title("Blog Posts"),
+      listPane(S, "project", "Projects", "featured desc, _createdAt desc"),
+      listPane(S, "skill", "Skills", "name asc"),
+      listPane(S, "beyondItem", "Beyond the Code", "order asc"),
+      listPane(S, "milestone", "Milestones", "date desc"),
+      listPane(S, "blog", "Blog Posts", "publishedAt desc"),
       S.divider(),
-      S.documentTypeListItem("planetMark").title("Planet Marks ✍️"),
+      listPane(S, "planetMark", "Planet Marks ✍️", "submittedAt desc"),
     ]);
