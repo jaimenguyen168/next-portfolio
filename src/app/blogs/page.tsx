@@ -27,6 +27,7 @@ export const metadata: Metadata = {
     title: "Blog | Jaime Nguyen",
     description:
       "Thoughts on engineering, career growth, and building things that matter.",
+    images: [{ url: "https://jaimenguyen.com/jaime.png" }],
   },
 };
 

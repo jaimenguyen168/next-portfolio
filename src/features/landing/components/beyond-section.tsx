@@ -502,6 +502,16 @@ export default function BeyondSection({ beyondItems }: Props) {
           setRocketState("landed");
         }}
       />
+
+      <div className="sr-only" aria-hidden="false">
+        <h3>Beyond the Code — Who I am outside of work</h3>
+        {VALUES.map((v) => (
+          <div key={v.id}>
+            <h4>{v.title}</h4>
+            <p>{v.body}</p>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

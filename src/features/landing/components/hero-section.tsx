@@ -146,17 +146,10 @@ export default function HeroSection() {
         </motion.h1>
 
         <motion.p
-          className="text-base md:text-xl font-medium mb-2 md:mb-3 text-slate-200"
-          variants={fadeUp}
-        >
-          Building web apps & mobile experiences
-        </motion.p>
-
-        <motion.p
           className="text-sm md:text-base mb-8 md:mb-12 max-w-lg text-muted-foreground"
           variants={fadeUp}
         >
-          Crafting polished, production-ready apps with Next.js, React Native, Expo, and SwiftUI
+          Open to full-time or contract roles, building polished, production-ready apps with modern frameworks across web and mobile.
         </motion.p>
 
         <motion.div className="flex items-center gap-4" variants={fadeUp}>

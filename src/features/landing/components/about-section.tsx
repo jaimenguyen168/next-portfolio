@@ -62,10 +62,12 @@ export default function AboutSection() {
               About Me
             </h2>
             <p className="text-xs md:text-base max-w-2xl leading-relaxed text-muted-foreground mb-3">
-              Frontend and mobile developer focused on building polished,
-              production-ready products. I work across web and mobile, from
-              Next.js apps to React Native and SwiftUI experiences, always
-              reaching for the right tool to get things done properly.
+              Full-stack developer specializing in web and mobile, from Next.js
+              apps to React Native and SwiftUI experiences, with a strong eye
+              for intuitive, polished interfaces that feel right to use.
+              Passionate about AI and human-computer interaction, I bring
+              hands-on research experience building AI-driven tools and studying
+              how people actually interact with them.
             </p>
             <div className="flex flex-wrap items-center gap-2 justify-center md:justify-start">
               <span className="inline-flex items-center gap-1.5 text-[11px] font-medium px-3 py-1 rounded-full border border-purple-500/25 bg-purple-500/10 text-purple-300/80">

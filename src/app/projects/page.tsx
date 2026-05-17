@@ -32,6 +32,7 @@ export const metadata: Metadata = {
     title: "Projects | Jaime Nguyen",
     description:
       "From Clover (a VS Code extension capstone) to PersuAI (antagonistic AI for argument training) — a full showcase of Jaime Nguyen's web, mobile, and research projects.",
+    images: [{ url: "https://jaimenguyen.com/jaime.png" }],
   },
 };
 
