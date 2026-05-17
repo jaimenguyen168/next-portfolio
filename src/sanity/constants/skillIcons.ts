@@ -118,6 +118,7 @@ import {
   SiGooglegemini,
   SiOllama,
   SiRevenuecat,
+  SiResend,
   SiStripe,
   SiSwagger,
   SiJest,
@@ -202,6 +203,7 @@ export const SKILL_ICONS: Record<string, IconType> = {
   recoil: SiRecoil,
   mobx: SiMobx,
   react_query: SiReactquery,
+  tanstack_start: SiReactquery, // TanStack ecosystem, no dedicated icon
   swr: SiSwr,
   xstate: SiXstate,
   pinia: SiPinia,
@@ -332,6 +334,7 @@ export const SKILL_ICONS: Record<string, IconType> = {
 
   // AI & APIs
   openai_api: SiOpenai,
+  openrouter: FaCode, // No OpenRouter icon
   anthropic_api: SiAnthropic,
   langchain: SiLangchain,
   hugging_face: SiHuggingface,
@@ -340,6 +343,7 @@ export const SKILL_ICONS: Record<string, IconType> = {
   ollama: SiOllama,
   deepseek_api: FaCode, // No DeepSeek icon
   stripe: SiStripe,
+  resend: SiResend,
   polar: FaCode, // No Polar icon
   revenuecat: SiRevenuecat,
   swagger: SiSwagger,
