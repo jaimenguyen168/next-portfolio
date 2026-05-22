@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { SKILL_META } from "@/sanity/constants/skillMeta";
 import { SKILL_CATEGORIES } from "@/sanity/constants/skillCategories";
+import SimpleIcon from "@/components/simple-icon";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const CATEGORY_DESCRIPTIONS: Record<string, string> = {
@@ -26,7 +27,7 @@ export default function SkillsSection({ activeSkills }: Props) {
     skills: cat.skills
       .filter((value) => activeSet.has(value))
       .map((value) => ({ ...SKILL_META[value], value }))
-      .filter((s) => s.icon),
+      .filter(Boolean),
   })).filter((cat) => cat.skills.length > 0);
 
   return (
@@ -69,7 +70,7 @@ export default function SkillsSection({ activeSkills }: Props) {
 
               <TooltipProvider delayDuration={300}>
                 <div className="flex flex-wrap gap-2 md:gap-3">
-                  {cat.skills.map(({ icon: Icon, label, color, value, description }) => (
+                  {cat.skills.map(({ iconSlug, label, color, value, description }) => (
                     <Tooltip key={label}>
                       <TooltipTrigger asChild>
                         <motion.div
@@ -85,8 +86,8 @@ export default function SkillsSection({ activeSkills }: Props) {
                             className="flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-md px-2 py-1 md:px-3 md:py-1.5 cursor-pointer"
                             aria-label={`View projects using ${label}`}
                           >
-                            <Icon size={14} color={color} className="md:hidden" />
-                            <Icon size={16} color={color} className="hidden md:block" />
+                            <SimpleIcon slug={iconSlug} color={color} size={14} label={label} className="md:hidden" />
+                            <SimpleIcon slug={iconSlug} color={color} size={16} label={label} className="hidden md:block" />
                             <span className="text-xs text-slate-300 whitespace-nowrap">{label}</span>
                             {description && <span className="sr-only">{description}</span>}
                           </Link>

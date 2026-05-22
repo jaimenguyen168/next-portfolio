@@ -7,6 +7,7 @@ import { useMemo, useState, useEffect } from "react";
 import { ArrowLeft, X } from "lucide-react";
 import ProjectCard, { type Project } from "@/features/projects/components/project-card";
 import { SKILL_META } from "@/sanity/constants/skillMeta";
+import SimpleIcon from "@/components/simple-icon";
 import posthog from "posthog-js";
 
 export type { Project };
@@ -45,7 +46,7 @@ export default function ProjectsView({ projects, initialSkills }: Props) {
   // All unique skills across projects, in the order they first appear
   const allSkills = useMemo(() => {
     const seen = new Set<string>();
-    const result: { value: string; label: string; color: string; icon: React.ComponentType<{ size?: number; color?: string }> }[] = [];
+    const result: { value: string; label: string; color: string; iconSlug: string | null; description: string }[] = [];
     for (const project of projects) {
       for (const s of project.skills ?? []) {
         if (!seen.has(s.name) && SKILL_META[s.name]) {
@@ -113,7 +114,7 @@ export default function ProjectsView({ projects, initialSkills }: Props) {
                 All
               </button>
 
-              {allSkills.map(({ value, label, color, icon: Icon }) => {
+              {allSkills.map(({ value, label, color, iconSlug }) => {
                 const isActive = activeSkills.has(value);
                 return (
                   <motion.button
@@ -138,7 +139,7 @@ export default function ProjectsView({ projects, initialSkills }: Props) {
                     aria-pressed={isActive}
                     aria-label={`${isActive ? "Remove" : "Add"} filter: ${label}`}
                   >
-                    <Icon size={12} color={isActive ? color : undefined} />
+                    <SimpleIcon slug={iconSlug} color={isActive ? color : undefined} size={12} label={label} />
                     {label}
                     {isActive && <X size={11} className="ml-0.5 opacity-70" />}
                   </motion.button>

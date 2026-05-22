@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { urlFor } from "@/sanity/lib/image";
 import { SKILL_META } from "@/sanity/constants/skillMeta";
+import SimpleIcon from "@/components/simple-icon";
 
 type SanityImage = {
   _type: "image";
@@ -125,12 +126,12 @@ export default function ProjectCard({
         {/* Skill badges */}
         {tags.length > 0 && (
           <div className="flex items-center gap-1.5 md:gap-2 overflow-hidden">
-            {visibleTags.map(({ icon: Icon, label, color }) => (
+            {visibleTags.map(({ iconSlug, label, color }) => (
               <div
                 key={label}
                 className="flex items-center gap-1 md:gap-1.5 bg-white/5 border border-white/10 rounded-md px-1.5 py-1 md:px-3 md:py-1 shrink-0"
               >
-                <Icon size={12} color={color} />
+                <SimpleIcon slug={iconSlug} color={color} size={12} label={label} />
                 <span className="text-xs text-slate-300 hidden md:inline whitespace-nowrap">
                   {label}
                 </span>

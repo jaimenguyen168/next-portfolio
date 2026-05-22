@@ -3,34 +3,34 @@
 import Link from "next/link";
 import FloatingDots from "./floating-dots";
 import ScrollIndicator from "./scroll-indicator";
-import { SiNextdotjs, SiReact, SiExpo, SiSwift, SiClerk, SiOpenai, SiTailwindcss, SiGithub, SiVite, SiTrpc, SiTypescript } from "react-icons/si";
-import { Zap } from "lucide-react";
+import { Zap, Brain } from "lucide-react";
+import SimpleIcon from "@/components/simple-icon";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import posthog from "posthog-js";
 
-type TechIcon = { icon: React.ElementType; color: string; label: string };
+type TechIcon = { iconSlug?: string; icon?: React.ElementType; color: string; label: string };
 
 const FIXED_ICONS: TechIcon[] = [
-  { icon: SiNextdotjs, color: "#ffffff",  label: "Next.js" },
-  { icon: SiReact,     color: "#818cf8",  label: "React Native" },
-  { icon: SiExpo,      color: "#f59e0b",  label: "Expo" },
-  { icon: SiSwift,     color: "#f05138",  label: "SwiftUI" },
+  { iconSlug: "nextdotjs",   color: "#ffffff",  label: "Next.js" },
+  { iconSlug: "react",       color: "#818cf8",  label: "React Native" },
+  { iconSlug: "expo",        color: "#f59e0b",  label: "Expo" },
+  { iconSlug: "swift",       color: "#f05138",  label: "SwiftUI" },
 ];
 
 const POOL_ICONS: TechIcon[] = [
-  { icon: SiClerk,       color: "#6c47ff", label: "Clerk" },
-  { icon: SiOpenai,      color: "#ffffff", label: "OpenAI" },
-  { icon: SiTailwindcss, color: "#38bdf8", label: "Tailwind" },
-  { icon: SiGithub,      color: "#ffffff", label: "GitHub" },
-  { icon: Zap,           color: "#f59e0b", label: "Inngest" },
-  { icon: SiVite,        color: "#a78bfa", label: "Vite" },
-  { icon: SiTrpc,        color: "#398ccb", label: "tRPC" },
-  { icon: SiTypescript,  color: "#3178c6", label: "TypeScript" },
+  { iconSlug: "clerk",       color: "#6c47ff", label: "Clerk" },
+  { icon: Brain,             color: "#ffffff", label: "OpenAI" },
+  { iconSlug: "tailwindcss", color: "#38bdf8", label: "Tailwind" },
+  { iconSlug: "github",      color: "#ffffff", label: "GitHub" },
+  { icon: Zap,               color: "#f59e0b", label: "Inngest" },
+  { iconSlug: "vite",        color: "#a78bfa", label: "Vite" },
+  { iconSlug: "trpc",        color: "#398ccb", label: "tRPC" },
+  { iconSlug: "typescript",  color: "#3178c6", label: "TypeScript" },
 ];
 
 function SlotIcon({ entry }: { entry: TechIcon }) {
-  const Icon = entry.icon;
+  const LucideIcon = entry.icon;
   return (
     <AnimatePresence mode="popLayout">
       <motion.div
@@ -41,8 +41,17 @@ function SlotIcon({ entry }: { entry: TechIcon }) {
         transition={{ duration: 0.35, ease: "easeInOut" }}
         className="absolute inset-0 flex items-center justify-center"
       >
-        <Icon size={26} color={entry.color} className="md:hidden" />
-        <Icon size={36} color={entry.color} className="hidden md:block" />
+        {entry.iconSlug ? (
+          <>
+            <SimpleIcon slug={entry.iconSlug} color={entry.color} size={26} label={entry.label} className="md:hidden" />
+            <SimpleIcon slug={entry.iconSlug} color={entry.color} size={36} label={entry.label} className="hidden md:block" />
+          </>
+        ) : LucideIcon ? (
+          <>
+            <LucideIcon size={26} color={entry.color} className="md:hidden" />
+            <LucideIcon size={36} color={entry.color} className="hidden md:block" />
+          </>
+        ) : null}
       </motion.div>
     </AnimatePresence>
   );

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Code2Icon } from "lucide-react";
-import { SiGithub } from "react-icons/si";
+import SimpleIcon from "@/components/simple-icon";
 import { motion } from "framer-motion";
 
 export default function SiteFooter() {
@@ -50,7 +50,7 @@ export default function SiteFooter() {
           aria-label="View portfolio source code on GitHub"
           className="flex items-center gap-2 text-xs text-muted-foreground hover:text-white transition-colors"
         >
-          <SiGithub size={14} aria-hidden="true" /> Source
+          <SimpleIcon slug="github" size={14} label="GitHub" /> Source
         </Link>
       </div>
     </motion.footer>

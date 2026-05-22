@@ -347,6 +347,7 @@ export default function BeyondSection({ beyondItems }: Props) {
               r={sunR}
               fill="url(#sunGrad)"
               filter="url(#sunGlow)"
+              initial={{ r: sunR }}
               animate={{ r: [sunR, sunR + 2, sunR] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             />

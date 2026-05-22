@@ -21,16 +21,23 @@
     "lucide-react": "^1.11.0",
     "next": "16.2.4",
     "next-sanity": "^12.3.1",
+    "next-seo": "^7.2.0",
     "posthog-js": "^1.373.4",
     "posthog-node": "^5.34.1",
     "prettier": "^3.8.3",
     "radix-ui": "^1.4.3",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "react-icons": "^5.6.0",
     "resend": "^4.8.0",
     "sanity": "^5.22.0"
   },
+  "browserslist": [
+    "chrome >= 93",
+    "firefox >= 90",
+    "safari >= 15.4",
+    "edge >= 93",
+    "not dead"
+  ],
   "devDependencies": {
     "@sanity/types": "^5.22.0",
     "@tailwindcss/postcss": "^4",

@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
 import posthog from "posthog-js";
+import { ArticleJsonLd } from "next-seo";
 
 const CATEGORY_META: Record<string, { label: string; color: string }> = {
   engineering: { label: "Engineering", color: "#818cf8" },
@@ -67,126 +68,141 @@ export default function BlogDetailView({ blog }: Props) {
   const color = meta?.color ?? "#818cf8";
 
   useEffect(() => {
-    posthog.capture("blog_post_viewed", { slug: blog.slug, title: blog.title, category: blog.category });
+    posthog.capture("blog_post_viewed", {
+      slug: blog.slug,
+      title: blog.title,
+      category: blog.category,
+    });
   }, [blog.slug, blog.title, blog.category]);
 
   return (
-    <div className="min-h-screen px-4 md:px-16 py-18">
-      <div className="max-w-5xl mx-auto w-full">
-        <motion.div
-          initial={{ opacity: 0, x: -16 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-          className="mb-8"
-        >
-          <Link
-            href="/blogs"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-white transition-colors"
-          >
-            <ArrowLeft size={15} /> All posts
-          </Link>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, ease: "easeOut" }}
-          className="mb-8"
-        >
-          <div className="flex flex-wrap items-center gap-2 mb-4">
-            <span
-              className="text-[10px] font-semibold tracking-widest uppercase px-2.5 py-0.5 rounded-full border"
-              style={{
-                color,
-                borderColor: `${color}40`,
-                background: `${color}15`,
-              }}
-            >
-              {meta?.label ?? blog.category}
-            </span>
-            {blog.featured && (
-              <span className="text-[10px] font-semibold tracking-widest uppercase text-accent-light/70 px-2.5 py-0.5 rounded-full border border-accent-light/20 bg-accent-light/5">
-                Featured
-              </span>
-            )}
-          </div>
-
-          <h1 className="text-2xl md:text-4xl font-bold text-white leading-snug mb-4">
-            {blog.title}
-          </h1>
-
-          <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground/70 mb-6">
-            <span className="flex items-center gap-1.5">
-              <Calendar size={12} />
-              {formatDate(blog.publishedAt)}
-            </span>
-            {blog.readingTime && (
-              <span className="flex items-center gap-1.5">
-                <Clock size={12} />
-                {blog.readingTime} min read
-              </span>
-            )}
-          </div>
-
-          {blog.tags && blog.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1.5">
-              {blog.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400"
-                >
-                  <Tag size={9} />
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
-        </motion.div>
-
-        {blog.coverImage?.url && (
+    <>
+      <ArticleJsonLd
+        type="BlogPosting"
+        url={`https://jaimenguyen.com/blogs/${blog.slug}`}
+        headline={blog.title}
+        description={blog.excerpt}
+        datePublished={blog.publishedAt}
+        author="Jaime Nguyen"
+        image={blog.coverImage?.url ?? "https://jaimenguyen.com/jaime.png"}
+      />
+      <div className="min-h-screen px-4 md:px-16 py-18">
+        <div className="max-w-5xl mx-auto w-full">
           <motion.div
-            className="relative w-full h-52 md:h-96 rounded-xl overflow-hidden mb-10"
-            initial={{ opacity: 0, scale: 1.04 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.55, ease: "easeOut", delay: 0.1 }}
+            initial={{ opacity: 0, x: -16 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="mb-8"
           >
-            <Image
-              src={blog.coverImage.url}
-              alt={blog.coverImage.alt ?? blog.title}
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#080d2e]/60 to-transparent" />
+            <Link
+              href="/blogs"
+              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-white transition-colors"
+            >
+              <ArrowLeft size={15} /> All posts
+            </Link>
           </motion.div>
-        )}
 
-        {blog.body && blog.body.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-            className="prose-blog"
+            transition={{ duration: 0.55, ease: "easeOut" }}
+            className="mb-8"
           >
-            <PortableBody blocks={blog.body} />
-          </motion.div>
-        )}
+            <div className="flex flex-wrap items-center gap-2 mb-4">
+              <span
+                className="text-[10px] font-semibold tracking-widest uppercase px-2.5 py-0.5 rounded-full border"
+                style={{
+                  color,
+                  borderColor: `${color}40`,
+                  background: `${color}15`,
+                }}
+              >
+                {meta?.label ?? blog.category}
+              </span>
+              {blog.featured && (
+                <span className="text-[10px] font-semibold tracking-widest uppercase text-accent-light/70 px-2.5 py-0.5 rounded-full border border-accent-light/20 bg-accent-light/5">
+                  Featured
+                </span>
+              )}
+            </div>
 
-        <motion.div
-          className="mt-14 pt-8 border-t border-white/10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.4 }}
-        >
-          <Link
-            href="/blogs"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-white transition-colors"
+            <h1 className="text-2xl md:text-4xl font-bold text-white leading-snug mb-4">
+              {blog.title}
+            </h1>
+
+            <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground/70 mb-6">
+              <span className="flex items-center gap-1.5">
+                <Calendar size={12} />
+                {formatDate(blog.publishedAt)}
+              </span>
+              {blog.readingTime && (
+                <span className="flex items-center gap-1.5">
+                  <Clock size={12} />
+                  {blog.readingTime} min read
+                </span>
+              )}
+            </div>
+
+            {blog.tags && blog.tags.length > 0 && (
+              <div className="flex flex-wrap gap-1.5">
+                {blog.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400"
+                  >
+                    <Tag size={9} />
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </motion.div>
+
+          {blog.coverImage?.url && (
+            <motion.div
+              className="relative w-full h-52 md:h-96 rounded-xl overflow-hidden mb-10"
+              initial={{ opacity: 0, scale: 1.04 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.55, ease: "easeOut", delay: 0.1 }}
+            >
+              <Image
+                src={blog.coverImage.url}
+                alt={blog.coverImage.alt ?? blog.title}
+                fill
+                className="object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#080d2e]/60 to-transparent" />
+            </motion.div>
+          )}
+
+          {blog.body && blog.body.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+              className="prose-blog"
+            >
+              <PortableBody blocks={blog.body} />
+            </motion.div>
+          )}
+
+          <motion.div
+            className="mt-14 pt-8 border-t border-white/10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.4 }}
           >
-            <ArrowLeft size={14} /> Back to all posts
-          </Link>
-        </motion.div>
+            <Link
+              href="/blogs"
+              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-white transition-colors"
+            >
+              <ArrowLeft size={14} /> Back to all posts
+            </Link>
+          </motion.div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

@@ -66,6 +66,9 @@ export function BeyondRocket({
         href="/rocket.svg"
         x={40}
         y={sizeH - 180}
+        width={80}
+        height={80}
+        initial={{ width: 80, height: 80 }}
         animate={{
           width:
             rocketState === "home" || rocketState === "recalling" || rocketState === "entering" ? 80 : 36,
