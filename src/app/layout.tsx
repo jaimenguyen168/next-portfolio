@@ -5,7 +5,12 @@ import { Suspense } from "react";
 import { SanityLive } from "@/sanity/lib/live";
 import ChatWidgetLoader from "@/features/chat/components/chat-widget-loader";
 import { PageViewTracker } from "@/components/page-view-tracker";
-import { PostHogProvider } from "@/components/posthog-provider";
+import dynamic from "next/dynamic";
+
+const PostHogProvider = dynamic(
+  () => import("@/components/posthog-provider").then((m) => m.PostHogProvider),
+  { ssr: false }
+);
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-geist-sans",
