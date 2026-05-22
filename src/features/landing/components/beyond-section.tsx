@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import FloatingDots from "./floating-dots";
 import { BeyondRocket, type RocketState } from "./beyond-rocket";
 import { BeyondPlanetCard } from "./beyond-planet-card";
@@ -33,6 +33,7 @@ const PLANET_SIZES = [8, 14, 15, 10, 26, 19, 17, 16, 7];
 
 const ROCKET_W = 50;
 const ROCKET_H = 50;
+
 
 type BeyondItem = {
   _id: string;
@@ -218,6 +219,20 @@ export default function BeyondSection({ beyondItems }: Props) {
 
   const sunR = Math.round(32 * (orbitScale - 0.2));
   const sunFontSize = Math.round(9 * orbitScale);
+
+  // All marks across every planet, for cycling above the rocket
+  const allMarks = useMemo(
+    () => VALUES.flatMap((v) => v.marks.map((m) => ({ ...m, accentColor: v.accentColor, planetLabel: v.label }))),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [beyondItems],
+  );
+  const [markIdx, setMarkIdx] = useState(0);
+  useEffect(() => {
+    if (allMarks.length < 2) return;
+    const t = setInterval(() => setMarkIdx((i) => (i + 1) % allMarks.length), 4000);
+    return () => clearInterval(t);
+  }, [allMarks.length]);
+
 
   return (
     <section
@@ -458,6 +473,53 @@ export default function BeyondSection({ beyondItems }: Props) {
             })}
           </motion.g>
 
+          {/* Mark cycling bubble — anchored above the rocket's home position */}
+          {allMarks.length > 0 && (() => {
+            const m = allMarks[markIdx];
+            return (
+              <foreignObject
+                x={size.w / 2 - 80}
+                y={size.h - 170}
+                width={160}
+                height={90}
+                style={{ overflow: "visible" }}
+              >
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={m._id + markIdx}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.6 }}
+                    className="relative rounded-[10px] px-2.5 py-1.5 text-[11px] text-white leading-[1.4]"
+                    style={{
+                      background: "rgba(20,16,50,0.92)",
+                      border: "1px solid rgba(167,139,250,0.4)",
+                      boxShadow: "0 0 12px rgba(167,139,250,0.2)",
+                      display: "inline-block",
+                      maxWidth: 150,
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: 4, marginBottom: 3 }}>
+                      <span>{m.emoji}</span>
+                      {m.nickname && (
+                        <span style={{ fontSize: 9, color: "rgba(167,139,250,0.8)", fontWeight: 600 }}>
+                          {m.nickname}
+                        </span>
+                      )}
+                    </div>
+                    <span style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+                      {m.mark}
+                    </span>
+                    <div style={{ marginTop: 4, fontSize: 9, color: m.accentColor, fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase" }}>
+                      {m.planetLabel}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </foreignObject>
+            );
+          })()}
+
           <BeyondRocket
             rocketState={rocketState}
             rocketPos={rocketPos}
@@ -473,12 +535,15 @@ export default function BeyondSection({ beyondItems }: Props) {
             onClick={handleLeoClick}
           />
         </svg>
-      </div>
 
-      <BeyondRecallButton
-        visible={rocketState === "landed"}
-        onRecall={handleRecall}
-      />
+        {/* Recall button sits where the rocket's home base is */}
+        <BeyondRecallButton
+          visible={rocketState === "landed"}
+          onRecall={handleRecall}
+          className="absolute z-40 flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold cursor-pointer select-none text-[#c4b5fd]"
+          style={{ left: 10, bottom: 90 }}
+        />
+      </div>
 
       <BeyondLeoCard
         visible={showLeoCard}
