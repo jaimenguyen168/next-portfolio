@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import FloatingDots from "./floating-dots";
 import ScrollIndicator from "./scroll-indicator";
 import { Zap, Brain } from "lucide-react";
@@ -9,7 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import posthog from "posthog-js";
 
-type TechIcon = { iconSlug?: string; icon?: React.ElementType; color: string; label: string };
+type TechIcon = { iconSlug?: string; icon?: React.ElementType; svgSrc?: string; color: string; label: string };
 
 const FIXED_ICONS: TechIcon[] = [
   { iconSlug: "nextdotjs",   color: "#ffffff",  label: "Next.js" },
@@ -27,6 +28,7 @@ const POOL_ICONS: TechIcon[] = [
   { iconSlug: "vite",        color: "#a78bfa", label: "Vite" },
   { iconSlug: "trpc",        color: "#398ccb", label: "tRPC" },
   { iconSlug: "typescript",  color: "#3178c6", label: "TypeScript" },
+  { iconSlug: "huggingface", color: "#ff9d00", label: "Hugging Face" },
 ];
 
 function SlotIcon({ entry }: { entry: TechIcon }) {
@@ -45,6 +47,11 @@ function SlotIcon({ entry }: { entry: TechIcon }) {
           <>
             <SimpleIcon slug={entry.iconSlug} color={entry.color} size={26} label={entry.label} className="md:hidden" />
             <SimpleIcon slug={entry.iconSlug} color={entry.color} size={36} label={entry.label} className="hidden md:block" />
+          </>
+        ) : entry.svgSrc ? (
+          <>
+            <Image src={entry.svgSrc} width={26} height={26} alt={entry.label} className="md:hidden" />
+            <Image src={entry.svgSrc} width={36} height={36} alt={entry.label} className="hidden md:block" />
           </>
         ) : LucideIcon ? (
           <>
